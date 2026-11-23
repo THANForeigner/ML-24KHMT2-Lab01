@@ -1,0 +1,17 @@
+feature,unique_including_blank,loaded_dtype,inferred_dtype_first_1000
+Student_ID,50000,string,int64
+Major_Category,5,string,object
+Year_of_Study,5,string,object
+Pre_Semester_GPA,2389,string,float64
+Weekly_GenAI_Hours,3566,string,float64
+Primary_Use_Case,5,string,object
+Prompt_Engineering_Skill,3,string,object
+Tool_Diversity,5,string,int64
+Paid_Subscription,2,string,bool
+Traditional_Study_Hours,2516,string,float64
+Perceived_AI_Dependency,10,string,int64
+Institutional_Policy,3,string,object
+Anxiety_Level_During_Exams,10,string,int64
+Post_Semester_GPA,2269,string,float64
+Skill_Retention_Score,5872,string,float64
+Burnout_Risk_Level,3,string,object

@@ -1,0 +1,23 @@
+{
+  "source_sha256": "4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472",
+  "partition_sha256": {
+    "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
+    "validation": "b3106a38788934ce332f16387a70c40729eaccd690aaa7e20727d7c51fbb9fdf",
+    "test": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b"
+  },
+  "assignment_sha256": "e16169646cc830e3f238571080429c8412aefeb1146314f98aac778407a7d60a",
+  "counts": {
+    "train": 35000,
+    "validation": 7500,
+    "test": 7500
+  },
+  "group_approval": "unconfirmed",
+  "method": "new_gpa_quantile_stratified_split_not_original_eda",
+  "cv_seed": 42,
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.5.5",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.9.1"
+  }
+}

@@ -1,0 +1,11 @@
+check,value,method,limitation
+mean specification,-3.5433751171305111e-15,train residual mean; inspect residual vs fitted and key predictors,zero mean with intercept does not prove linearity
+residual variance,0.025816367173165964,SSE / residual df,inspect scale-location; heteroscedasticity possible
+residual normality,-0.21842127152256524,residual skewness + histogram + Q-Q,"normality affects inference, not a predictor normality requirement"
+independence,,sampling/design audit; ID grouping before split,unknown sampling design and synthetic generator; residual plots cannot verify independence
+rank,40,40 design columns including intercept,pinv coefficients not identified if rank deficient
+predictions above documented GPA endpoint,1893,unclipped train fitted predictions,no silent clipping; floor unknown
+large internally standardized residual,188,abs(e / sqrt(MSE*(1-h))) > 3,heuristic; retain observations
+high leverage,1387,h > 2p/n; threshold=0.0022857143; n=35000; p=40,"heuristic, not an exclusion rule"
+large Cook distance,1641,Cook D > 4/n; threshold=0.00011428571; rank used in Cook denominator,"heuristic; inspect, do not delete automatically"
+optional formal tests,,skipped: RUN_OPTIONAL_TESTS=False or singular design,core visual/effect-size diagnostics retained

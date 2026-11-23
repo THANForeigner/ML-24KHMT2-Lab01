@@ -1,0 +1,17 @@
+feature,semantic_type,encoding,fit_scope,ordinal_policy,reason
+Student_ID,identifier,exclude from X,train only,,ID/target/auxiliary/unknown forbidden in predictors
+Major_Category,nominal,mode imputation + one-hot drop-first; unknown categories handled,train only,,preserve units; avoid invented ordinal distances
+Year_of_Study,ordinal,mode imputation + one-hot drop-first; unknown categories handled,train only,one-hot by default; ranks used only for Spearman,preserve units; avoid invented ordinal distances
+Pre_Semester_GPA,continuous,median imputation,train only,,preserve units; avoid invented ordinal distances
+Weekly_GenAI_Hours,continuous,median imputation,train only,,preserve units; avoid invented ordinal distances
+Primary_Use_Case,nominal,mode imputation + one-hot drop-first; unknown categories handled,train only,,preserve units; avoid invented ordinal distances
+Prompt_Engineering_Skill,ordinal,mode imputation + one-hot drop-first; unknown categories handled,train only,one-hot by default; ranks used only for Spearman,preserve units; avoid invented ordinal distances
+Tool_Diversity,discrete,median imputation,train only,,preserve units; avoid invented ordinal distances
+Paid_Subscription,binary,mode imputation + one-hot drop-first; unknown categories handled,train only,,preserve units; avoid invented ordinal distances
+Traditional_Study_Hours,continuous,median imputation,train only,,preserve units; avoid invented ordinal distances
+Perceived_AI_Dependency,ordinal,mode imputation + one-hot drop-first; unknown categories handled,train only,one-hot by default; ranks used only for Spearman,preserve units; avoid invented ordinal distances
+Institutional_Policy,nominal,mode imputation + one-hot drop-first; unknown categories handled,train only,,preserve units; avoid invented ordinal distances
+Anxiety_Level_During_Exams,ordinal,mode imputation + one-hot drop-first; unknown categories handled,train only,one-hot by default; ranks used only for Spearman,preserve units; avoid invented ordinal distances
+Post_Semester_GPA,continuous,exclude from X,train only,,ID/target/auxiliary/unknown forbidden in predictors
+Skill_Retention_Score,continuous,exclude from X,train only,,ID/target/auxiliary/unknown forbidden in predictors
+Burnout_Risk_Level,ordinal,exclude from X,train only,one-hot by default; ranks used only for Spearman,ID/target/auxiliary/unknown forbidden in predictors

@@ -1,0 +1,10 @@
+issue,status,evidence,consequence,action
+synthetic provenance,synthetic,official user_specified_sources in saved metadata,Learns simulated patterns; external validity to real students unverified,No causal or population claims
+license and version,CC0-1.0; publisher version=1,https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students,Local bytes not authenticated to publisher checksum,Record local SHA-256; retain source metadata snapshot
+sampling / independence,unknown,publisher does not describe sampling or generation mechanism,SE/CI are descriptive; representative inference unsupported,Audit real cohort before external use
+feature timing,mostly unknown,T40; source definitions,E2/E3 not verified forecasts,Obtain measurement dates / freeze cutoff
+hours coverage,study additivity unverified,AI usage hours not explicitly restricted to study,Total/ratio may misstate study time,Skip unless documented
+GPA boundaries / precision,upper documented; lower and precision unverified,T18; source approximate ranges,Floor effect unknown; equality tolerance only numerical,No inferred floor; no silent prediction clipping
+group imbalance,0 rare category rows in frequency table,T12; T21; T24,Small subgroups have unstable summaries,Flag n<30; report counts
+holdout policy,test untouched for analysis,T41; split assignments,"Validation is exploratory, not final estimate",Final test only after model specification frozen
+course source PDFs,unavailable in workspace,brief.md references two PDF files,Exact original rubric not verified,Confirm final model count versus team size and Ridge allowance

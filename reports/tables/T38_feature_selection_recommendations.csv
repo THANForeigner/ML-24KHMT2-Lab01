@@ -1,0 +1,17 @@
+feature,decision,rationale,pearson_post,evidence,screening_policy
+Student_ID,Exclude,role-based leakage guard,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Major_Category,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Year_of_Study,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Pre_Semester_GPA,Keep,pre-semester availability,0.92640874763146319,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Weekly_GenAI_Hours,Conditional,timing unverified; retrospective analysis only,-0.019141038869072407,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Primary_Use_Case,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Prompt_Engineering_Skill,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Tool_Diversity,Conditional,timing unverified; retrospective analysis only,0.025963147149013367,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Paid_Subscription,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Traditional_Study_Hours,Conditional,timing unverified; retrospective analysis only,0.13379075718493336,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Perceived_AI_Dependency,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Institutional_Policy,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Anxiety_Level_During_Exams,Conditional,timing unverified; retrospective analysis only,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Post_Semester_GPA,Exclude,role-based leakage guard,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Skill_Retention_Score,Exclude,role-based leakage guard,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness
+Burnout_Risk_Level,Exclude,role-based leakage guard,,T19; T20; T28; T33; T35; T40,no elimination solely by marginal correlation or skewness

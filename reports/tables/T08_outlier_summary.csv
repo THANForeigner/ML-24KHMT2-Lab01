@@ -1,0 +1,9 @@
+feature,valid_n,q1,q3,iqr,lower_fence,upper_fence,flagged_count,flagged_pct,p01,p99,reason,action
+Pre_Semester_GPA,35000,2.8359999999999999,3.5209999999999999,0.68500000000000005,1.8084999999999998,4.5484999999999998,234,0.66857142857142859,1.883,3.9199999999999999,,retain; investigate; no automatic deletion
+Weekly_GenAI_Hours,35000,2.3900000000000001,11.692499999999999,9.3024999999999984,-11.563749999999997,25.646249999999995,1832,5.234285714285714,0.089999999999999997,38.620500000000099,,retain; investigate; no automatic deletion
+Tool_Diversity,35000,2,4,2,-1,7,,,1,5,"IQR not meaningful: discrete/ordinal, constant, missing, or IQR=0",retain; investigate; no automatic deletion
+Traditional_Study_Hours,35000,7.5199999999999996,14.710000000000001,7.1900000000000013,-3.2650000000000023,25.495000000000005,107,0.30571428571428572,1,23.34,,retain; investigate; no automatic deletion
+Perceived_AI_Dependency,35000,2,5,3,-2.5,9.5,,,1,9,"IQR not meaningful: discrete/ordinal, constant, missing, or IQR=0",retain; investigate; no automatic deletion
+Anxiety_Level_During_Exams,35000,3,6,3,-1.5,10.5,,,1,10,"IQR not meaningful: discrete/ordinal, constant, missing, or IQR=0",retain; investigate; no automatic deletion
+Post_Semester_GPA,35000,3.0230000000000001,3.7490000000000001,0.72599999999999998,1.9340000000000002,4.8380000000000001,237,0.67714285714285716,2.0189900000000001,4,,retain; investigate; no automatic deletion
+Skill_Retention_Score,35000,66.817499999999995,85.109999999999999,18.292500000000004,39.378749999999989,112.54875000000001,156,0.44571428571428573,43.879800000000003,100,,retain; investigate; no automatic deletion

@@ -1,0 +1,8 @@
+candidate,valid_n,skewness,pearson_post,spearman_post,pair_vif_with_linear_H,validation_MAE,validation_RMSE,validation_R2,quadratic_coefficient,reason
+Original_H,35000,1.6062427326399416,-0.019141038869072407,0.007945637207238055,,0.12301697098757965,0.15710916386931822,0.89932169287791752,,"E3 conditional baseline, fixed feature set; validation exploratory"
+AI_Hours_Squared,35000,3.2806512993126602,-0.032093826077341757,0.007945637207238055,7.8258655067763492,,,,,distribution/correlation only; not an automatic feature selection rule
+Log_AI_Hours,35000,-0.088760297543840502,0.00282930863673047,0.007945637207238055,,,,,,distribution/correlation only; not an automatic feature selection rule
+Centered_AI_Hours,35000,1.6062427326399416,-0.01914103886907241,0.007945637207238055,,,,,,distribution/correlation only; not an automatic feature selection rule
+Centered_AI_Hours_Squared,35000,4.366495840602985,-0.04052896905502313,-0.042879751768775801,2.3265529202023516,0.12258532057459876,0.15632118498102862,0.90032906168226734,-0.00019737221662704973,"Fixed E3 + centered H^2; retain H, no extra linear duplicate; conditional/retrospective; not tuned"
+H_x_Prompt_Beginner,35000,2.665915826978885,-0.0091258693078568147,0.0095939950767038058,,,,,,distribution/correlation only; not an automatic feature selection rule
+H_x_Prompt_Intermediate,35000,2.6359335915376345,-0.013999882975413396,0.0043045347019013778,,,,,,distribution/correlation only; not an automatic feature selection rule

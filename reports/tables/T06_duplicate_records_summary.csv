@@ -1,0 +1,5 @@
+issue,groups,affected_rows,removed_rows,action
+exact duplicate,0,0,0,remove subsequent exact records
+duplicate content excluding ID,0,0,0,retain different IDs; group connected content
+repeated nonmissing Student ID,0,0,0,group all records
+same ID conflicting content,0,0,0,retain and group; investigate

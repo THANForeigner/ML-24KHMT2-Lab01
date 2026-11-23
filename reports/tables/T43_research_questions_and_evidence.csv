@@ -1,0 +1,13 @@
+research_question,finding_id,status,evidence_ids,data_scope
+RQ01,FND-001,resolved,T01 T05 T06 T07 T09 T41,full_structural_audit
+RQ02,FND-002,resolved,T15 T29 F16 F49,validation
+RQ03,FND-003,resolved,T19 T20 F24 F32,train
+RQ04,FND-004,resolved,T19 T20 F35,train
+RQ05,FND-005,resolved,T21 T22 F25 F27 F28,train
+RQ06,FND-006,resolved,T20 T26 F37 F39,train
+RQ07,FND-007,resolved,T24 T25 T26 T33 T35 F24 F53,train + limited validation
+RQ08,FND-008,resolved,T29 F49,validation
+RQ09,FND-009,resolved,T27 T28 F41 F54,train
+RQ10,FND-010,resolved,T33 T34 T35 T36 T37 T38,train + metadata
+RQ11,FND-011,resolved,T18 T31 T32 F43 F45 F46 F48,train
+RQ12,FND-012,resolved,T40 T42 T48,metadata

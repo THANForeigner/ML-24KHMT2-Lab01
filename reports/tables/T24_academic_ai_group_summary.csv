@@ -1,0 +1,131 @@
+analysis,left_level,right_level,outcome,n,mean,std,small_group
+AI_Hours_Group x Study_Hours_Group,"(-0.001, 2.39]","(0.999, 7.52]",Post_Semester_GPA,1854,3.2292238403451994,0.50086159015364118,False
+AI_Hours_Group x Study_Hours_Group,"(-0.001, 2.39]","(11.18, 14.71]",Post_Semester_GPA,2289,3.3421987767584098,0.50018416999599968,False
+AI_Hours_Group x Study_Hours_Group,"(-0.001, 2.39]","(14.71, 35.86]",Post_Semester_GPA,2544,3.409250786163522,0.48283792564929218,False
+AI_Hours_Group x Study_Hours_Group,"(-0.001, 2.39]","(7.52, 11.18]",Post_Semester_GPA,2073,3.3144177520501685,0.49094725840372472,False
+AI_Hours_Group x Study_Hours_Group,"(11.692, 40.0]","(0.999, 7.52]",Post_Semester_GPA,2870,3.2593473867595817,0.511059409453956,False
+AI_Hours_Group x Study_Hours_Group,"(11.692, 40.0]","(11.18, 14.71]",Post_Semester_GPA,1996,3.3599714428857714,0.50784837463081478,False
+AI_Hours_Group x Study_Hours_Group,"(11.692, 40.0]","(14.71, 35.86]",Post_Semester_GPA,1630,3.4488079754601224,0.47593728591119483,False
+AI_Hours_Group x Study_Hours_Group,"(11.692, 40.0]","(7.52, 11.18]",Post_Semester_GPA,2254,3.335178793256433,0.50153125709207214,False
+AI_Hours_Group x Study_Hours_Group,"(2.39, 5.8]","(0.999, 7.52]",Post_Semester_GPA,1888,3.2639274364406781,0.49495457605481408,False
+AI_Hours_Group x Study_Hours_Group,"(2.39, 5.8]","(11.18, 14.71]",Post_Semester_GPA,2296,3.3746040940766551,0.4852162930419176,False
+AI_Hours_Group x Study_Hours_Group,"(2.39, 5.8]","(14.71, 35.86]",Post_Semester_GPA,2383,3.4331216953420056,0.47454896200695273,False
+AI_Hours_Group x Study_Hours_Group,"(2.39, 5.8]","(7.52, 11.18]",Post_Semester_GPA,2175,3.3351636781609195,0.49157563716256575,False
+AI_Hours_Group x Study_Hours_Group,"(5.8, 11.692]","(0.999, 7.52]",Post_Semester_GPA,2142,3.2910392156862747,0.5028320285195933,False
+AI_Hours_Group x Study_Hours_Group,"(5.8, 11.692]","(11.18, 14.71]",Post_Semester_GPA,2175,3.3917655172413794,0.48416547595013459,False
+AI_Hours_Group x Study_Hours_Group,"(5.8, 11.692]","(14.71, 35.86]",Post_Semester_GPA,2170,3.4585027649769584,0.46794325218726451,False
+AI_Hours_Group x Study_Hours_Group,"(5.8, 11.692]","(7.52, 11.18]",Post_Semester_GPA,2261,3.3518345864661652,0.49780138651259848,False
+Primary_Use_Case x Prompt_Engineering_Skill,Copywriting/Drafting,Advanced,Post_Semester_GPA,2199,3.3309690768531151,0.49347620529704439,False
+Primary_Use_Case x Prompt_Engineering_Skill,Copywriting/Drafting,Beginner,Post_Semester_GPA,3262,3.3443712446351932,0.49192238894379769,False
+Primary_Use_Case x Prompt_Engineering_Skill,Copywriting/Drafting,Intermediate,Post_Semester_GPA,2982,3.3275848423876595,0.500722127989361,False
+Primary_Use_Case x Prompt_Engineering_Skill,Debugging/Troubleshooting,Advanced,Post_Semester_GPA,2619,3.5166571210385644,0.45866735088517729,False
+Primary_Use_Case x Prompt_Engineering_Skill,Debugging/Troubleshooting,Beginner,Post_Semester_GPA,2893,3.3472357414448668,0.49253055568107301,False
+Primary_Use_Case x Prompt_Engineering_Skill,Debugging/Troubleshooting,Intermediate,Post_Semester_GPA,3069,3.3412984685565328,0.48891257773865543,False
+Primary_Use_Case x Prompt_Engineering_Skill,Direct_Answer_Generation,Advanced,Post_Semester_GPA,1221,3.2899312039312036,0.52157551063677099,False
+Primary_Use_Case x Prompt_Engineering_Skill,Direct_Answer_Generation,Beginner,Post_Semester_GPA,1648,3.2821753640776699,0.5260217953240236,False
+Primary_Use_Case x Prompt_Engineering_Skill,Direct_Answer_Generation,Intermediate,Post_Semester_GPA,1549,3.3105765009683665,0.49069443237015309,False
+Primary_Use_Case x Prompt_Engineering_Skill,Ideation,Advanced,Post_Semester_GPA,1975,3.3684111392405063,0.50128435355395073,False
+Primary_Use_Case x Prompt_Engineering_Skill,Ideation,Beginner,Post_Semester_GPA,2845,3.3310235500878735,0.4922801662706171,False
+Primary_Use_Case x Prompt_Engineering_Skill,Ideation,Intermediate,Post_Semester_GPA,2677,3.3477698916697793,0.49786418277404099,False
+Primary_Use_Case x Prompt_Engineering_Skill,Summarizing_Reading,Advanced,Post_Semester_GPA,1633,3.3554060012247398,0.49470151541229185,False
+Primary_Use_Case x Prompt_Engineering_Skill,Summarizing_Reading,Beginner,Post_Semester_GPA,2277,3.3582793148880103,0.49534372257603959,False
+Primary_Use_Case x Prompt_Engineering_Skill,Summarizing_Reading,Intermediate,Post_Semester_GPA,2151,3.3285671780567174,0.48730476116333138,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,1.0,Post_Semester_GPA,977,3.3423510747185259,0.51479041830243399,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,2.0,Post_Semester_GPA,829,3.3477261761158021,0.502508394961935,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,3.0,Post_Semester_GPA,948,3.3403881856540085,0.49457436517703107,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,4.0,Post_Semester_GPA,963,3.3774859813084115,0.47369636906265972,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,5.0,Post_Semester_GPA,683,3.3288857979502193,0.47475953952485617,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,6.0,Post_Semester_GPA,446,3.3324417040358743,0.49165034159623683,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,7.0,Post_Semester_GPA,187,3.2554117647058827,0.55549891018406716,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,8.0,Post_Semester_GPA,84,3.4360119047619047,0.48885655850804349,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,1.0,9.0,Post_Semester_GPA,18,3.407888888888889,0.57490570980239764,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,1.0,Post_Semester_GPA,1,3.827,,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,10.0,Post_Semester_GPA,24,3.0793750000000002,0.53962118858872932,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,2.0,Post_Semester_GPA,2,2.8979999999999997,0.76791796436859039,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,3.0,Post_Semester_GPA,5,3.1444000000000001,0.53012856931125674,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,4.0,Post_Semester_GPA,12,3.4781666666666666,0.45649630752929304,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,5.0,Post_Semester_GPA,12,3.01125,0.70693154162581717,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,6.0,Post_Semester_GPA,29,3.2672068965517238,0.50831229007024137,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,7.0,Post_Semester_GPA,30,3.2403333333333331,0.41089367139857763,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,8.0,Post_Semester_GPA,13,3.3722307692307689,0.46633377778978485,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,10.0,9.0,Post_Semester_GPA,10,3.1606999999999998,0.59579080034671372,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,1.0,Post_Semester_GPA,981,3.3522915392456678,0.49709934807532574,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,10.0,Post_Semester_GPA,4,3.2015000000000002,0.59417477787824913,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,2.0,Post_Semester_GPA,873,3.3683883161512029,0.48754218749570988,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,3.0,Post_Semester_GPA,1106,3.3727504520795661,0.47406284128634624,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,4.0,Post_Semester_GPA,1080,3.3446759259259258,0.49567453836503084,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,5.0,Post_Semester_GPA,1017,3.335569321533923,0.49304894600069255,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,6.0,Post_Semester_GPA,619,3.3869547657512116,0.47225201833802455,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,7.0,Post_Semester_GPA,343,3.3507551020408162,0.50779425954323554,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,8.0,Post_Semester_GPA,150,3.3680933333333334,0.49758511256925597,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,2.0,9.0,Post_Semester_GPA,55,3.4165818181818182,0.43966678000626502,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,1.0,Post_Semester_GPA,842,3.3835629453681713,0.48332853202954551,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,10.0,Post_Semester_GPA,17,3.1394117647058821,0.49644839344381114,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,2.0,Post_Semester_GPA,947,3.3279514255543825,0.49842670843820253,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,3.0,Post_Semester_GPA,1222,3.3553101472995093,0.49473797319857149,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,4.0,Post_Semester_GPA,1295,3.3483451737451739,0.50620909986658724,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,5.0,Post_Semester_GPA,1226,3.3731476345840132,0.49183206216137482,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,6.0,Post_Semester_GPA,905,3.3630453038674033,0.47436539483034135,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,7.0,Post_Semester_GPA,468,3.3483611111111111,0.49676741327863966,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,8.0,Post_Semester_GPA,257,3.3650116731517508,0.51409881317403894,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,3.0,9.0,Post_Semester_GPA,129,3.3466666666666667,0.49509104802382897,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,1.0,Post_Semester_GPA,637,3.3649952904238618,0.47075137482117246,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,10.0,Post_Semester_GPA,39,3.2107948717948718,0.62534403918277703,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,2.0,Post_Semester_GPA,736,3.3756019021739134,0.49983595180565515,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,3.0,Post_Semester_GPA,1055,3.34262654028436,0.49868576506059642,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,4.0,Post_Semester_GPA,1273,3.3509567949725061,0.48998789343255655,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,5.0,Post_Semester_GPA,1167,3.3591893744644388,0.50214621293662021,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,6.0,Post_Semester_GPA,945,3.3501068783068786,0.48152142599477921,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,7.0,Post_Semester_GPA,607,3.3131186161449753,0.51032720601014525,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,8.0,Post_Semester_GPA,320,3.3874312500000001,0.47823819987834915,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,4.0,9.0,Post_Semester_GPA,185,3.312708108108108,0.45048835963003764,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,1.0,Post_Semester_GPA,343,3.345104956268222,0.51407836178095168,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,10.0,Post_Semester_GPA,82,3.2399634146341465,0.50110210499721597,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,2.0,Post_Semester_GPA,384,3.3839739583333333,0.49770431662526671,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,3.0,Post_Semester_GPA,611,3.3941653027823242,0.4696058694588422,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,4.0,Post_Semester_GPA,810,3.3635555555555556,0.4934233859724067,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,5.0,Post_Semester_GPA,891,3.349781144781145,0.49896159623811298,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,6.0,Post_Semester_GPA,687,3.3578762736535661,0.51162861280342342,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,7.0,Post_Semester_GPA,474,3.3655780590717304,0.50677338470950195,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,8.0,Post_Semester_GPA,273,3.317018315018315,0.52489431327125569,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,5.0,9.0,Post_Semester_GPA,176,3.3434147727272729,0.47422108600218416,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,1.0,Post_Semester_GPA,113,3.3557079646017698,0.50994822358703262,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,10.0,Post_Semester_GPA,98,3.3008571428571427,0.48464490135806759,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,2.0,Post_Semester_GPA,175,3.3191714285714289,0.48650096488512162,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,3.0,Post_Semester_GPA,299,3.2768929765886288,0.5239038623296538,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,4.0,Post_Semester_GPA,374,3.3405989304812835,0.50942893391717547,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,5.0,Post_Semester_GPA,447,3.3764876957494407,0.49251448655557328,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,6.0,Post_Semester_GPA,372,3.3758494623655917,0.47300641815620315,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,7.0,Post_Semester_GPA,259,3.3462471042471043,0.46482824278648321,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,8.0,Post_Semester_GPA,181,3.273265193370166,0.55597892281551575,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,6.0,9.0,Post_Semester_GPA,111,3.3214324324324322,0.46495772284099557,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,1.0,Post_Semester_GPA,43,3.345372093023256,0.44470819877735629,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,10.0,Post_Semester_GPA,85,3.3302823529411767,0.48225609704518496,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,2.0,Post_Semester_GPA,66,3.2177121212121214,0.56024562649311416,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,3.0,Post_Semester_GPA,119,3.3774621848739494,0.48589781987009156,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,4.0,Post_Semester_GPA,188,3.293367021276596,0.56532048397504142,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,5.0,Post_Semester_GPA,182,3.3171043956043955,0.50153478816277353,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,6.0,Post_Semester_GPA,177,3.3210960451977396,0.53737554250026365,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,7.0,Post_Semester_GPA,159,3.3317987421383646,0.50960937857596855,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,8.0,Post_Semester_GPA,100,3.3239399999999999,0.52161398359206956,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,7.0,9.0,Post_Semester_GPA,84,3.202464285714286,0.546322788350045,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,1.0,Post_Semester_GPA,13,3.4032307692307691,0.41224267809268073,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,10.0,Post_Semester_GPA,62,3.1736612903225807,0.53073261903073732,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,2.0,Post_Semester_GPA,32,3.444375,0.44753610414817824,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,3.0,Post_Semester_GPA,44,3.2532727272727273,0.55421821592835396,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,4.0,Post_Semester_GPA,66,3.3003636363636364,0.48413032690234697,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,5.0,Post_Semester_GPA,106,3.2608207547169812,0.51435870005964124,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,6.0,Post_Semester_GPA,101,3.2600396039603963,0.56730050098324591,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,7.0,Post_Semester_GPA,91,3.3681648351648352,0.5031678373340972,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,8.0,Post_Semester_GPA,58,3.4046379310344825,0.53530167583338495,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,8.0,9.0,Post_Semester_GPA,37,3.1902432432432435,0.4873103280824817,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,1.0,Post_Semester_GPA,1,2.2010000000000001,,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,10.0,Post_Semester_GPA,36,3.2176944444444446,0.58068953197012485,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,2.0,Post_Semester_GPA,3,3.6043333333333329,0.22683988479395201,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,3.0,Post_Semester_GPA,18,3.1622777777777777,0.62099614525236846,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,4.0,Post_Semester_GPA,22,3.403772727272727,0.58852446094069955,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,5.0,Post_Semester_GPA,42,3.3325476190476189,0.54938085782580026,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,6.0,Post_Semester_GPA,44,3.3842045454545455,0.63429908503889865,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,7.0,Post_Semester_GPA,39,3.2421282051282052,0.55103807201963351,False
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,8.0,Post_Semester_GPA,27,3.2685185185185186,0.62744435060442849,True
+Perceived_AI_Dependency x Anxiety_Level_During_Exams,9.0,9.0,Post_Semester_GPA,22,3.2685909090909093,0.63199507676585343,True

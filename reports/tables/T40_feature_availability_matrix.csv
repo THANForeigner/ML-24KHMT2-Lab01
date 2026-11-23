@@ -1,0 +1,17 @@
+feature,availability,prediction_cutoff,source_evidence,allowed_scenario,forecast_eligible,leakage_risk
+Student_ID,unavailable,Before end-of-semester GPA is known,post-semester outcome / identifier / unknown role,not a predictor,False,high
+Major_Category,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Year_of_Study,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Pre_Semester_GPA,available,Before end-of-semester GPA is known,GPA at start of semester,pre-semester baseline,True,low
+Weekly_GenAI_Hours,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Primary_Use_Case,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Prompt_Engineering_Skill,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Tool_Diversity,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Paid_Subscription,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Traditional_Study_Hours,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Perceived_AI_Dependency,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Institutional_Policy,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,conditional
+Anxiety_Level_During_Exams,unknown,Before end-of-semester GPA is known,measurement timing not specified by publisher,conditional / retrospective only,False,high
+Post_Semester_GPA,unavailable,Before end-of-semester GPA is known,post-semester outcome / identifier / unknown role,not a predictor,False,high
+Skill_Retention_Score,unavailable,Before end-of-semester GPA is known,post-semester outcome / identifier / unknown role,not a predictor,False,high
+Burnout_Risk_Level,unavailable,Before end-of-semester GPA is known,post-semester outcome / identifier / unknown role,not a predictor,False,high

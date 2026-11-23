@@ -1,0 +1,142 @@
+{
+  "run_signature": "4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472:9bcd0a091cd6a0b04b26c85fc516b53b1a32280aac7d951292e8dff8fdad4ece",
+  "status": "completed",
+  "started_at": "2026-11-17T02:14:03.995367+00:00",
+  "dataset_path": "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\archive\\ai_student_impact_dataset (1).csv",
+  "dataset_sha256": "4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472",
+  "config_sha256": "9bcd0a091cd6a0b04b26c85fc516b53b1a32280aac7d951292e8dff8fdad4ece",
+  "config": {
+    "target": "Post_Semester_GPA",
+    "id": "Student_ID",
+    "seed": 42,
+    "ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "plot_sample_size": 5000,
+    "dpi": 300,
+    "save_figures": true,
+    "save_tables": true,
+    "optional_tests": false,
+    "plot_validation_target": false,
+    "min_group": 30,
+    "gpa_tolerance": 1e-09,
+    "cutoff": "Before end-of-semester GPA is known",
+    "verified_available": [
+      "Pre_Semester_GPA"
+    ],
+    "high_correlation_threshold": 0.8,
+    "gpa_upper": 4.0,
+    "gpa_lower": null,
+    "hours_additive": false,
+    "implementation_version": "1.0",
+    "source_metadata_sha256": "b512a4594e06e77e7e7b5832290ee12d8a06ced39755c563efe9d3c08c597e51"
+  },
+  "source_metadata": {
+    "source_url": "https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students",
+    "retrieved_date": "2026-11-17",
+    "retrieval_method": "Kaggle MCP get_dataset_info and get_dataset_metadata",
+    "dataset_id": 10386009,
+    "dataset_version": 1,
+    "version_created": "2026-05-10T23:12:10.070Z",
+    "license": "CC0-1.0",
+    "provenance": "synthetic",
+    "provenance_evidence": "user_specified_sources: This dataset was synthetically generated to simulate real-world student behavior and academic outcomes in the context of Generative AI adoption.",
+    "local_file_version_match": "unverified: local CSV schema and byte count match publisher metadata; no publisher checksum was supplied",
+    "publisher_file_bytes": 5892478,
+    "gpa_upper_boundary": 4.0,
+    "gpa_lower_boundary": null,
+    "gpa_boundary_evidence": "Publisher describes Pre GPA approximately 1.18-4.00 and Post GPA approximately 1.00-4.00. Upper endpoint 4.00 is documented; a theoretical lower boundary and measurement precision are not verified.",
+    "hours_units": "Weekly_GenAI_Hours and Traditional_Study_Hours: hours/week",
+    "hours_additivity": "unverified: AI usage is not explicitly limited to study; total study hours and study ratio must not be assumed",
+    "collection_time": "unknown",
+    "sampling_design": "unknown; synthetic data generation details not provided",
+    "measurement_precision": "unverified",
+    "unavailable_references": [
+      "ml-data.pdf",
+      "Lab 01 - Linear Regression.pdf"
+    ],
+    "notes": "This is a curated metadata snapshot, not a copy of the raw API response. No publisher statistics are used as notebook results."
+  },
+  "row_count_raw": 50000,
+  "columns_raw": 16,
+  "versions": {
+    "numpy": "2.5.5",
+    "pandas": "2.3.3",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.14.6",
+    "nbformat": "5.11.1",
+    "nbclient": "0.10.4"
+  },
+  "python": "3.13.9",
+  "warnings": [
+    "Optional columns absent: []",
+    "Extra columns excluded from models: []"
+  ],
+  "completed_at": "2026-11-17T02:14:53.729220+00:00",
+  "split_metadata": {
+    "dataset_sha256": "4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472",
+    "assignment_sha256": "55d231e2354dd82df624dd097470490ab6a1796398825cb204bd56a4228c3316",
+    "split_config": {
+      "seed": 42,
+      "ratios": [
+        0.7,
+        0.15,
+        0.15
+      ]
+    },
+    "split_rule": "random rows; no repeated groups",
+    "stable_key": "sha256(dataset sha256 + colon + zero-based source row position)",
+    "content_group_method": "pandas stable uint64 row content hash; independent of Python randomized hash",
+    "counts": {
+      "train": 35000,
+      "validation": 7500,
+      "test": 7500
+    },
+    "eligible_rows": 50000,
+    "raw_rows": 50000,
+    "actual_ratios": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "exclusions": {},
+    "target_in_assignment": false
+  },
+  "artifact_status_counts": {
+    "generated": 101,
+    "skipped": 2,
+    "reused": 2
+  },
+  "artifact_coverage": {
+    "tables": 48,
+    "figures": 57
+  },
+  "unresolved": [
+    "local CSV publisher checksum/version authentication",
+    "sampling/generation mechanism",
+    "most feature timestamps",
+    "true GPA lower bound and precision",
+    "AI hours study coverage",
+    "course PDFs and actual team size",
+    "external validation on real students"
+  ],
+  "invariant_checks": {
+    "raw_unchanged": true,
+    "all_splits_disjoint": true,
+    "no_forbidden_predictors": true,
+    "manifest_paths_readable": true,
+    "test_policy": "counts/integrity only; no target profile, metrics or fitted preprocessing"
+  },
+  "report_files": [
+    "EDA_FINDINGS.md",
+    "DATA_DICTIONARY.md",
+    "PREPROCESSING_PLAN.md",
+    "artifact_manifest.csv",
+    "preprocessing_log.csv"
+  ]
+}

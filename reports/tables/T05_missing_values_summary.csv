@@ -1,0 +1,17 @@
+feature,missing_count,missing_pct,denominator,sentinel_policy
+Student_ID,0,0,50000,none verified; zero retained
+Major_Category,0,0,50000,none verified; zero retained
+Year_of_Study,0,0,50000,none verified; zero retained
+Pre_Semester_GPA,0,0,50000,none verified; zero retained
+Weekly_GenAI_Hours,0,0,50000,none verified; zero retained
+Primary_Use_Case,0,0,50000,none verified; zero retained
+Prompt_Engineering_Skill,0,0,50000,none verified; zero retained
+Tool_Diversity,0,0,50000,none verified; zero retained
+Paid_Subscription,0,0,50000,none verified; zero retained
+Traditional_Study_Hours,0,0,50000,none verified; zero retained
+Perceived_AI_Dependency,0,0,50000,none verified; zero retained
+Institutional_Policy,0,0,50000,none verified; zero retained
+Anxiety_Level_During_Exams,0,0,50000,none verified; zero retained
+Post_Semester_GPA,0,0,50000,none verified; zero retained
+Skill_Retention_Score,0,0,50000,none verified; zero retained
+Burnout_Risk_Level,0,0,50000,none verified; zero retained

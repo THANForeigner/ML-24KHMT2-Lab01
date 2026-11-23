@@ -1,0 +1,11 @@
+feature,formula,status,constraint,fit_scope
+GPA_Change,Post_Semester_GPA - Pre_Semester_GPA,analytical outcome only,never predictor,no fitted parameters
+Total_Study_Hours,H + Traditional_Study_Hours,skipped,units + study-only coverage + no double count must be verified,train
+AI_Study_Ratio,H / Total_Study_Hours,skipped,valid total >0; zero denominator -> missing,train
+AI_Hours_Squared,H**2,candidate,retain H; redundancy audit,train
+Log_AI_Hours,log1p(H),candidate,finite nonnegative H,train
+Centered_AI_Hours,H - mean_train(H),candidate,never use with raw H and intercept,train mean
+Centered_AI_Hours_Squared,(H - mean_train(H))**2,candidate,retain H or centered H; no duplicate linear term,train mean
+AI_Dependency_Interaction,H * Dependency,proposal only; skipped numeric product,ordinal interval-distance assumption and timing unverified,train
+AI_Prompt_Interaction,centered H * reference-coded Prompt dummy,candidate,train reference; retain prompt dummies and H,train reference and mean
+Study_Anxiety_Interaction,Study * Anxiety,proposal only; skipped numeric product,high temporal risk; interval-distance assumption unverified,train

@@ -1,0 +1,30 @@
+{
+  "run_id": "20261123_200230_56e998c",
+  "started_with_frozen_csv": true,
+  "smoke_test": false,
+  "test_status": "not_executed",
+  "csv_sha256": {
+    "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
+    "validation": "b3106a38788934ce332f16387a70c40729eaccd690aaa7e20727d7c51fbb9fdf",
+    "test": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b"
+  },
+  "selected": "I3",
+  "created_figures": [
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\05_cv_rmse.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\06_val_rmse.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\07_incremental_interactions.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\08_i3_coefficients.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\09_conditional_slopes.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\10_predicted_curves.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\11_subgroup_use_case.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\12_subgroup_prompt_skill.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\13_subgroup_ai_hours.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\14_validation_residuals.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\15_validation_actual_pred.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\16_singular_values.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\17_vif.png",
+    "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\interaction\\runs\\20261123_200230_56e998c\\figures\\20_what_if.png"
+  ],
+  "figure_count": 14,
+  "created_utc": "2026-11-23T14:16:14.512862+00:00"
+}

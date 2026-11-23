@@ -1,0 +1,20 @@
+check,left,right,value,passed,scope
+split row count,train,,35000,True,split_metadata
+row-key overlap,train,validation,0,True,split_metadata
+connected-group overlap,train,validation,0,True,split_metadata
+content-hash overlap,train,validation,0,True,split_metadata
+Student ID overlap,train,validation,0,True,split_metadata
+row-key overlap,train,test,0,True,split_metadata
+connected-group overlap,train,test,0,True,split_metadata
+content-hash overlap,train,test,0,True,split_metadata
+Student ID overlap,train,test,0,True,split_metadata
+split row count,validation,,7500,True,split_metadata
+row-key overlap,validation,test,0,True,split_metadata
+connected-group overlap,validation,test,0,True,split_metadata
+content-hash overlap,validation,test,0,True,split_metadata
+Student ID overlap,validation,test,0,True,split_metadata
+split row count,test,,7500,True,split_metadata
+all source rows assigned once,all,,50000,True,split_metadata
+raw CSV unchanged,raw,,4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472,True,full_structural_audit
+forbidden predictors absent,models,,3,True,split_metadata
+no test target/model frame materialized,test,,assignment/count/integrity only,True,split_metadata

@@ -1,0 +1,5 @@
+feature,boundary_type,boundary,count,percentage,valid_n,reason
+Pre_Semester_GPA,upper,4,0,0,35000,source-documented upper endpoint
+Pre_Semester_GPA,lower,,,,35000,theoretical lower boundary unverified; not inferred from sample minimum
+Post_Semester_GPA,upper,4,3371,9.6314285714285717,35000,source-documented upper endpoint
+Post_Semester_GPA,lower,,,,35000,theoretical lower boundary unverified; not inferred from sample minimum

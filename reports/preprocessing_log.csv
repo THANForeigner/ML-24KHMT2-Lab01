@@ -1,0 +1,19 @@
+model,feature,action
+E1,Pre_Semester_GPA,train median=3.2109999999999999; no scaling for raw-unit OLS
+E2,Major_Category,one-hot drop first; reference=Arts; unknown->all-zero with warning
+E2,Year_of_Study,one-hot drop first; reference=Freshman; unknown->all-zero with warning
+E2,Pre_Semester_GPA,train median=3.2109999999999999; no scaling for raw-unit OLS
+E2,Traditional_Study_Hours,train median=11.18; no scaling for raw-unit OLS
+E3,Major_Category,one-hot drop first; reference=Arts; unknown->all-zero with warning
+E3,Year_of_Study,one-hot drop first; reference=Freshman; unknown->all-zero with warning
+E3,Primary_Use_Case,one-hot drop first; reference=Copywriting/Drafting; unknown->all-zero with warning
+E3,Prompt_Engineering_Skill,one-hot drop first; reference=Advanced; unknown->all-zero with warning
+E3,Paid_Subscription,one-hot drop first; reference=False; unknown->all-zero with warning
+E3,Perceived_AI_Dependency,one-hot drop first; reference=1.0; unknown->all-zero with warning
+E3,Institutional_Policy,one-hot drop first; reference=Actively_Encouraged; unknown->all-zero with warning
+E3,Anxiety_Level_During_Exams,one-hot drop first; reference=1.0; unknown->all-zero with warning
+E3,Pre_Semester_GPA,train median=3.2109999999999999; no scaling for raw-unit OLS
+E3,Traditional_Study_Hours,train median=11.18; no scaling for raw-unit OLS
+E3,Weekly_GenAI_Hours,train median=5.7999999999999998; no scaling for raw-unit OLS
+E3,Tool_Diversity,train median=3; no scaling for raw-unit OLS
+engineering,AI_Prompt_Interaction,centered train H x prompt dummy; reference=Advanced; retain main effects

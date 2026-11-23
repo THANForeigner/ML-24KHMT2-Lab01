@@ -1,0 +1,2 @@
+rows,columns,file_bytes,memory_bytes,sha256,missing_optional,extra_columns,encoding,header_mapping,scope
+50000,16,5892478,44292304,4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472,,,utf-8-sig,none,full_structural_audit

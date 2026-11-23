@@ -1,0 +1,9 @@
+feature,outcome,method,valid_n,coefficient,reason
+Pre_Semester_GPA,Post_Semester_GPA,pearson,35000,0.92640874763146319,
+Weekly_GenAI_Hours,Post_Semester_GPA,pearson,35000,-0.019141038869072407,
+Tool_Diversity,Post_Semester_GPA,pearson,35000,0.025963147149013367,
+Traditional_Study_Hours,Post_Semester_GPA,pearson,35000,0.13379075718493336,
+Pre_Semester_GPA,GPA_Change,pearson,35000,-0.10199459972628898,
+Weekly_GenAI_Hours,GPA_Change,pearson,35000,-0.048109120752043405,
+Tool_Diversity,GPA_Change,pearson,35000,0.082717677604848688,
+Traditional_Study_Hours,GPA_Change,pearson,35000,0.37749508635077894,

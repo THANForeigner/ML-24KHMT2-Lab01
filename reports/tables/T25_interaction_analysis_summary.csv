@@ -1,0 +1,17 @@
+label,feature,edges,method,valid_n
+Pre GPA quartiles,Pre_Semester_GPA,"[1.183, 2.836, 3.211, 3.521, 3.998]",train qcut; duplicate edges dropped,35000
+F24: marginal AI Hours vs Post GPA,Weekly_GenAI_Hours,"[0.0, 0.88, 1.85, 2.9770000000000074, 4.26, 5.8, 7.68, 10.08, 13.58, 20.09, 40.0]",train qcut q=10; duplicate edges dropped,35000
+AI Hours quartiles,Weekly_GenAI_Hours,"[0.0, 2.39, 5.8, 11.692499999999999, 40.0]",train qcut; duplicate edges dropped,35000
+Traditional study quartiles,Traditional_Study_Hours,"[1.0, 7.52, 11.18, 14.71, 35.86]",train qcut; duplicate edges dropped,35000
+F33: Prompt_Engineering_Skill=Advanced; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.89, 4.31, 7.91, 14.14, 40.0]",train qcut q=5; duplicate edges dropped,9647
+F33: Prompt_Engineering_Skill=Beginner; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.86, 4.24, 7.57, 13.18, 40.0]",train qcut q=5; duplicate edges dropped,12925
+F33: Prompt_Engineering_Skill=Intermediate; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.82, 4.24, 7.6, 13.496000000000004, 40.0]",train qcut q=5; duplicate edges dropped,12428
+F34: Major_Category=Arts; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.59, 3.53, 6.67, 11.428, 36.0]",train qcut q=5; duplicate edges dropped,4204
+F34: Major_Category=Business; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.9140000000000008, 4.298000000000002, 7.71, 13.15, 40.0]",train qcut q=5; duplicate edges dropped,8753
+F34: Major_Category=Humanities; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.5060000000000013, 3.522000000000003, 6.24, 10.82, 34.0]",train qcut q=5; duplicate edges dropped,7024
+F34: Major_Category=Medical; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 1.66, 3.96, 7.12, 12.55, 38.0]",train qcut q=5; duplicate edges dropped,4511
+F34: Major_Category=STEM; outcome=Post_Semester_GPA,Weekly_GenAI_Hours,"[0.0, 2.44, 5.41, 9.87, 17.58, 40.0]",train qcut q=5; duplicate edges dropped,10508
+"F38: Pre_GPA_Group=(1.1820000000000002, 2.836]; outcome=GPA_Change",Weekly_GenAI_Hours,"[0.0, 1.76, 4.26, 7.66, 13.514000000000005, 40.0]",train qcut q=5; duplicate edges dropped,8759
+"F38: Pre_GPA_Group=(2.836, 3.211]; outcome=GPA_Change",Weekly_GenAI_Hours,"[0.0, 1.88, 4.23, 7.75, 13.79, 40.0]",train qcut q=5; duplicate edges dropped,8757
+"F38: Pre_GPA_Group=(3.211, 3.521]; outcome=GPA_Change",Weekly_GenAI_Hours,"[0.0, 1.92, 4.34, 7.6, 13.442000000000007, 40.0]",train qcut q=5; duplicate edges dropped,8735
+"F38: Pre_GPA_Group=(3.521, 3.998]; outcome=GPA_Change",Weekly_GenAI_Hours,"[0.0, 1.83, 4.222000000000002, 7.68, 13.51, 40.0]",train qcut q=5; duplicate edges dropped,8749

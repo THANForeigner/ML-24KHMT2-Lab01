@@ -1,0 +1,45 @@
+feature,issue,affected_rows,severity,rule,action,reason,data_scope
+Student_ID,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Major_Category,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Major_Category,case normalization,0,low,"{""stem"": ""STEM"", ""medical"": ""Medical"", ""humanities"": ""Humanities"", ""business"": ""Business"", ""arts"": ""Arts""}",retain,Category mapping is logged explicitly,full_structural_audit
+Year_of_Study,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Year_of_Study,case normalization,0,low,"{""freshman"": ""Freshman"", ""sophomore"": ""Sophomore"", ""junior"": ""Junior"", ""senior"": ""Senior"", ""graduate"": ""Graduate""}",retain,Category mapping is logged explicitly,full_structural_audit
+Pre_Semester_GPA,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Weekly_GenAI_Hours,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Primary_Use_Case,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Primary_Use_Case,case normalization,0,low,"{""summarizing_reading"": ""Summarizing_Reading"", ""ideation"": ""Ideation"", ""direct_answer_generation"": ""Direct_Answer_Generation"", ""debugging/troubleshooting"": ""Debugging/Troubleshooting"", ""copywriting/drafting"": ""Copywriting/Drafting""}",retain,Category mapping is logged explicitly,full_structural_audit
+Prompt_Engineering_Skill,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Prompt_Engineering_Skill,case normalization,0,low,"{""beginner"": ""Beginner"", ""intermediate"": ""Intermediate"", ""advanced"": ""Advanced""}",retain,Category mapping is logged explicitly,full_structural_audit
+Tool_Diversity,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Paid_Subscription,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Paid_Subscription,case normalization,0,low,"{""true"": ""True"", ""false"": ""False""}",retain,Category mapping is logged explicitly,full_structural_audit
+Traditional_Study_Hours,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Perceived_AI_Dependency,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Institutional_Policy,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Institutional_Policy,case normalization,0,low,"{""strict_ban"": ""Strict_Ban"", ""allowed_with_citation"": ""Allowed_With_Citation"", ""actively_encouraged"": ""Actively_Encouraged""}",retain,Category mapping is logged explicitly,full_structural_audit
+Anxiety_Level_During_Exams,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Post_Semester_GPA,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Skill_Retention_Score,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Burnout_Risk_Level,surrounding whitespace,0,low,strip surrounding whitespace only,retain,Semantics preserved; raw file unchanged,full_structural_audit
+Burnout_Risk_Level,case normalization,0,low,"{""low"": ""Low"", ""medium"": ""Medium"", ""high"": ""High""}",retain,Category mapping is logged explicitly,full_structural_audit
+Pre_Semester_GPA,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Weekly_GenAI_Hours,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Tool_Diversity,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Traditional_Study_Hours,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Perceived_AI_Dependency,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Anxiety_Level_During_Exams,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Post_Semester_GPA,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Skill_Retention_Score,numeric parse or nonfinite,0,none,numeric and finite,retain,exclude target / set predictor missing,full_structural_audit
+Weekly_GenAI_Hours,domain violation,0,none,lower=0; upper=None; integer=False; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Traditional_Study_Hours,domain violation,0,none,lower=0; upper=None; integer=False; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Tool_Diversity,domain violation,0,none,lower=1; upper=5; integer=True; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Perceived_AI_Dependency,domain violation,0,none,lower=1; upper=10; integer=True; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Anxiety_Level_During_Exams,domain violation,0,none,lower=1; upper=10; integer=True; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Skill_Retention_Score,domain violation,0,none,lower=0; upper=100; integer=False; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Pre_Semester_GPA,domain violation,0,none,lower=None; upper=4.0; integer=False; source=Kaggle metadata / nonnegative elapsed time,retain,set predictor missing; retain row,full_structural_audit
+Post_Semester_GPA,domain violation,0,none,lower=None; upper=4.0; integer=False; source=Kaggle metadata / nonnegative elapsed time,retain,exclude target,full_structural_audit
+Year_of_Study,unknown documented category,0,none,"documented categories: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']",investigate,retain unknown category; one-hot; investigate,full_structural_audit
+Prompt_Engineering_Skill,unknown documented category,0,none,"documented categories: ['Beginner', 'Intermediate', 'Advanced']",investigate,retain unknown category; one-hot; investigate,full_structural_audit
+Burnout_Risk_Level,unknown documented category,0,none,"documented categories: ['Low', 'Medium', 'High']",investigate,retain unknown category; one-hot; investigate,full_structural_audit
+Paid_Subscription,unknown documented category,0,none,"documented categories: ['True', 'False']",investigate,retain unknown category; one-hot; investigate,full_structural_audit
+ALL,regression sample exclusions,0,info,no target imputation; exact duplicate removal only,remove,before=50000; after=50000,full_structural_audit

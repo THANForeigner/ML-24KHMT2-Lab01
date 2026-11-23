@@ -1,0 +1,10 @@
+feature,valid_n,unique_nonmissing,mode,mode_n,least_frequent,least_n,missing_pct,rare_groups,denominator
+Major_Category,35000,5,STEM,10508,Arts,4204,0,0,35000
+Year_of_Study,35000,5,Junior,7733,Graduate,5204,0,0,35000
+Primary_Use_Case,35000,5,Debugging/Troubleshooting,8581,Direct_Answer_Generation,4418,0,0,35000
+Prompt_Engineering_Skill,35000,3,Beginner,12925,Advanced,9647,0,0,35000
+Paid_Subscription,35000,2,False,20155,True,14845,0,0,35000
+Institutional_Policy,35000,3,Allowed_With_Citation,17658,Strict_Ban,6869,0,0,35000
+Burnout_Risk_Level,35000,3,Medium,14830,High,8697,0,0,35000
+Perceived_AI_Dependency,35000,10,3.0,7308,10.0,138,0,0,35000
+Anxiety_Level_During_Exams,35000,10,4.0,6083,10.0,447,0,0,35000

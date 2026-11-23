@@ -1,0 +1,18 @@
+feature,issue,risk,action,evidence
+Student_ID,role/target leakage,high,Exclude from X,source metadata; T02; T33; code model allowlist
+Major_Category,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Year_of_Study,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Pre_Semester_GPA,temporal availability,low,Allow baseline,source metadata; T02; T33; code model allowlist
+Weekly_GenAI_Hours,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Primary_Use_Case,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Prompt_Engineering_Skill,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Tool_Diversity,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Paid_Subscription,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Traditional_Study_Hours,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Perceived_AI_Dependency,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Institutional_Policy,temporal availability,conditional,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Anxiety_Level_During_Exams,temporal availability,high,Conditional only; verify timestamp before forecasting,source metadata; T02; T33; code model allowlist
+Post_Semester_GPA,role/target leakage,high,Exclude from X,source metadata; T02; T33; code model allowlist
+Skill_Retention_Score,role/target leakage,high,Exclude from X,source metadata; T02; T33; code model allowlist
+Burnout_Risk_Level,role/target leakage,high,Exclude from X,source metadata; T02; T33; code model allowlist
+GPA_Change,target-derived leakage,high,Analytical target only; never X,Post minus Pre formula

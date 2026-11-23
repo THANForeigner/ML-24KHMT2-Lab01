@@ -1,0 +1,25 @@
+{
+  "fixture_policy": "Temporary actual-data subsets with injected faults; never EDA evidence",
+  "checks": [
+    {
+      "check": "optional columns absent + all save flags off",
+      "status": "PASS"
+    },
+    {
+      "check": "fault logging, exclusions, transitive groups, no ordinal information loss",
+      "status": "PASS"
+    },
+    {
+      "check": "constant target fails clearly",
+      "status": "PASS"
+    },
+    {
+      "check": "Gram VIF matches statsmodels; quantile edges strictly ordered",
+      "status": "PASS"
+    },
+    {
+      "check": "test-target permutation cannot change train EDA or validation metrics",
+      "status": "PASS"
+    }
+  ]
+}

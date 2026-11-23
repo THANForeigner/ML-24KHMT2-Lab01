@@ -1,0 +1,17 @@
+feature,OLS,polynomial_ridge,fit_scope
+Student_ID,not a predictor,not applicable,train only; never validation or test
+Major_Category,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Year_of_Study,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Pre_Semester_GPA,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Weekly_GenAI_Hours,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Primary_Use_Case,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Prompt_Engineering_Skill,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Tool_Diversity,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Paid_Subscription,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Traditional_Study_Hours,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Perceived_AI_Dependency,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Institutional_Policy,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Anxiety_Level_During_Exams,no scaling required; raw-unit coefficients,standardize encoded numeric matrix inside training pipeline,train only; never validation or test
+Post_Semester_GPA,not a predictor,not applicable,train only; never validation or test
+Skill_Retention_Score,not a predictor,not applicable,train only; never validation or test
+Burnout_Risk_Level,not a predictor,not applicable,train only; never validation or test

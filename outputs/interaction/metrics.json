@@ -1,0 +1,14 @@
+{
+  "selected": "I3",
+  "cv_rmse_mean": 0.15049593186609594,
+  "validation": {
+    "mae": 0.11991536683044443,
+    "mse": 0.022706580013447192,
+    "rmse": 0.15068702669256964,
+    "r2": 0.9082336734725989
+  },
+  "final_test": {
+    "status": "not executed",
+    "reason": "group split approval missing"
+  }
+}

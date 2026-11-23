@@ -1,0 +1,81 @@
+{
+  "dataset_sha256": "4d911088c4b12d60a450a9acae6b606f4119ebbb48679518e427a4fc00778472",
+  "raw_rows": 50000,
+  "columns": 16,
+  "clean_kernel_execution": true,
+  "reproducible_rerun": true,
+  "acceptance_criteria": {
+    "AC01": {
+      "status": "PASS",
+      "evidence": "nbformat validation, 12 sections, centralized config"
+    },
+    "AC02": {
+      "status": "PASS",
+      "evidence": "Actual archive CSV read; T01-T04 and metadata"
+    },
+    "AC03": {
+      "status": "PASS",
+      "evidence": "T05-T09; coercion/category/domain action logs"
+    },
+    "AC04": {
+      "status": "PASS",
+      "evidence": "Stable assignments + T41; raw SHA-256 unchanged"
+    },
+    "AC05": {
+      "status": "PASS",
+      "evidence": "T10-T13; F06-F11; per-feature interpretations"
+    },
+    "AC06": {
+      "status": "PASS",
+      "evidence": "T14-T18; paired GPA/Change; unverified floor explicitly N/A"
+    },
+    "AC07": {
+      "status": "PASS",
+      "evidence": "T19-T22; valid pair/group n; predictor-only matrices"
+    },
+    "AC08": {
+      "status": "PASS",
+      "evidence": "T23-T26; F32-F39; exact train bin edges and cell counts"
+    },
+    "AC09": {
+      "status": "PASS",
+      "evidence": "T27-T32; design rank/VIF/OLS + residual/influence diagnostics"
+    },
+    "AC10": {
+      "status": "PASS",
+      "evidence": "T33-T38; formulas, constraints, centering, fixed quadratic comparison"
+    },
+    "AC11": {
+      "status": "PASS",
+      "evidence": "T39-T42; explicit source, timing, role and bias restrictions"
+    },
+    "AC12": {
+      "status": "PASS",
+      "evidence": "All 105 planned IDs accounted; each saved artifact exists and decodes"
+    },
+    "AC13": {
+      "status": "PASS",
+      "evidence": "12 generated FND records map RQ/evidence/implication; checked against current outputs"
+    },
+    "AC14": {
+      "status": "PASS",
+      "evidence": "3 reports + manifest + split/run metadata exist"
+    },
+    "AC15": {
+      "status": "PASS",
+      "evidence": "Fresh-kernel nbclient execution on actual CSV; zero cell errors"
+    },
+    "AC16": {
+      "status": "PASS",
+      "evidence": "Second fresh kernel: split and key statistics compared"
+    },
+    "AC17": {
+      "status": "PASS",
+      "evidence": "Data access review: no test frame/target extraction, counts/integrity only; T41; predictors and preprocessing scopes checked"
+    },
+    "AC18": {
+      "status": "PASS",
+      "evidence": "T47; M01-M05 scenarios, evidence, eligibility, same metric protocol"
+    }
+  }
+}

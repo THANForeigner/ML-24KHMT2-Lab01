@@ -1,0 +1,21 @@
+feature,issue,affected_rows,rule,action
+Pre_Semester_GPA,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Weekly_GenAI_Hours,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Tool_Diversity,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Traditional_Study_Hours,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Perceived_AI_Dependency,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Anxiety_Level_During_Exams,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Post_Semester_GPA,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Skill_Retention_Score,numeric parse or nonfinite,0,numeric and finite,exclude target / set predictor missing
+Weekly_GenAI_Hours,domain violation,0,lower=0; upper=None; integer=False; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Traditional_Study_Hours,domain violation,0,lower=0; upper=None; integer=False; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Tool_Diversity,domain violation,0,lower=1; upper=5; integer=True; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Perceived_AI_Dependency,domain violation,0,lower=1; upper=10; integer=True; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Anxiety_Level_During_Exams,domain violation,0,lower=1; upper=10; integer=True; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Skill_Retention_Score,domain violation,0,lower=0; upper=100; integer=False; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Pre_Semester_GPA,domain violation,0,lower=None; upper=4.0; integer=False; source=Kaggle metadata / nonnegative elapsed time,set predictor missing; retain row
+Post_Semester_GPA,domain violation,0,lower=None; upper=4.0; integer=False; source=Kaggle metadata / nonnegative elapsed time,exclude target
+Year_of_Study,unknown documented category,0,"documented categories: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']",retain unknown category; one-hot; investigate
+Prompt_Engineering_Skill,unknown documented category,0,"documented categories: ['Beginner', 'Intermediate', 'Advanced']",retain unknown category; one-hot; investigate
+Burnout_Risk_Level,unknown documented category,0,"documented categories: ['Low', 'Medium', 'High']",retain unknown category; one-hot; investigate
+Paid_Subscription,unknown documented category,0,"documented categories: ['True', 'False']",retain unknown category; one-hot; investigate
