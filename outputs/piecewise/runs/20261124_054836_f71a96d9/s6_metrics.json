@@ -1,0 +1,116 @@
+{
+  "model": "S6",
+  "seed": 42,
+  "n_folds": 5,
+  "predictor_terms": 52,
+  "fit_scope": "train",
+  "year_levels": {
+    "Freshman": 1,
+    "Sophomore": 2,
+    "Junior": 3,
+    "Senior": 4,
+    "Graduate": 5
+  },
+  "policy_levels": {
+    "Strict_Ban": 0,
+    "Allowed_With_Citation": 1,
+    "Actively_Encouraged": 2
+  },
+  "numeric_features": [
+    "Weekly_GenAI_Hours",
+    "Pre_Semester_GPA",
+    "Traditional_Study_Hours",
+    "Tool_Diversity",
+    "Paid_Subscription",
+    "Perceived_AI_Dependency",
+    "Anxiety_Level_During_Exams",
+    "Year_of_Study",
+    "Institutional_Policy"
+  ],
+  "categorical_features": [
+    "Major_Category",
+    "Primary_Use_Case",
+    "Prompt_Engineering_Skill"
+  ],
+  "counts": {
+    "train": 35000,
+    "validation": 7500,
+    "test": 7500
+  },
+  "split_sha256": {
+    "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
+    "validation": "b3106a38788934ce332f16387a70c40729eaccd690aaa7e20727d7c51fbb9fdf",
+    "test": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b"
+  },
+  "cv": {
+    "mae": {
+      "cv_mean": 0.11630957743880357,
+      "cv_sd": 0.0014901569958060122
+    },
+    "mse": {
+      "cv_mean": 0.021481270130117146,
+      "cv_sd": 0.0005274753665018879
+    },
+    "rmse": {
+      "cv_mean": 0.1465559827645851,
+      "cv_sd": 0.0018076386612742848
+    },
+    "r2": {
+      "cv_mean": 0.9122953676398098,
+      "cv_sd": 0.0009021509019603828
+    }
+  },
+  "validation": {
+    "mae": 0.11670296092413492,
+    "mse": 0.021524402922486474,
+    "rmse": 0.14671197266237843,
+    "r2": 0.9130113215762793
+  },
+  "final_test": {
+    "status": "not_executed",
+    "note": "S6 evaluated on train/CV and validation"
+  },
+  "hinge": {
+    "pre_gpa_quantile": 0.75,
+    "pre_gpa_knot": 3.52,
+    "hours_knots": [
+      2.39,
+      5.78,
+      11.73
+    ],
+    "use_case_reference": "Copywriting/Drafting",
+    "use_case_levels": [
+      "Copywriting/Drafting",
+      "Debugging/Troubleshooting",
+      "Direct_Answer_Generation",
+      "Ideation",
+      "Summarizing_Reading"
+    ],
+    "score_knots": {
+      "Tool_Diversity": [
+        1.5
+      ],
+      "Perceived_AI_Dependency": [
+        4.5,
+        8.5
+      ],
+      "Anxiety_Level_During_Exams": [
+        4.5,
+        8.5
+      ]
+    },
+    "extra_interactions": [
+      [
+        "categorical__Primary_Use_Case_Debugging/Troubleshooting \u00d7 categorical__Prompt_Engineering_Skill_Beginner",
+        "categorical__Primary_Use_Case_Debugging/Troubleshooting \u00d7 categorical__Prompt_Engineering_Skill_Intermediate",
+        "categorical__Primary_Use_Case_Direct_Answer_Generation \u00d7 categorical__Prompt_Engineering_Skill_Beginner",
+        "categorical__Primary_Use_Case_Direct_Answer_Generation \u00d7 categorical__Prompt_Engineering_Skill_Intermediate",
+        "categorical__Primary_Use_Case_Ideation \u00d7 categorical__Prompt_Engineering_Skill_Beginner",
+        "categorical__Primary_Use_Case_Ideation \u00d7 categorical__Prompt_Engineering_Skill_Intermediate",
+        "categorical__Primary_Use_Case_Summarizing_Reading \u00d7 categorical__Prompt_Engineering_Skill_Beginner",
+        "categorical__Primary_Use_Case_Summarizing_Reading \u00d7 categorical__Prompt_Engineering_Skill_Intermediate"
+      ]
+    ]
+  },
+  "selection": "S5 plus Use Case \u00d7 Prompt Skill; exploratory"
+}
