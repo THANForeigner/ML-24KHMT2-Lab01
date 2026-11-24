@@ -1,0 +1,32 @@
+# Elastic Net Regression Configuration
+seed: 42
+n_splits: 5
+tie_threshold: 0.001
+max_iter: 10000
+tol: 0.0001
+
+hyperparameters:
+  alphas: [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+  l1_ratios: [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1.0]
+
+feature_sets:
+  - EN1
+  - EN2
+  - EN3
+
+scenarios:
+  - full
+  - no_anxiety
+
+paths:
+  data_dir: "data"
+  raw_data: "data/raw/ai_student_impact_dataset (1).csv"
+  assignments: "data/assignments.csv"
+  metadata: "data/metadata.json"
+  train_split: "data/train/dataset.csv"
+  val_split: "data/validation/dataset.csv"
+  test_split: "data/test/dataset.csv"
+  output_dir: "outputs/elastic_net"
+  models_dir: "outputs/elastic_net/models"
+  tables_dir: "outputs/elastic_net/tables"
+  figures_dir: "outputs/elastic_net/figures"

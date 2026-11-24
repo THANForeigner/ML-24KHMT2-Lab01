@@ -1,0 +1,6 @@
+interaction,missing_main_effects
+Hc * Primary_Use_Case=Ideation,['Primary_Use_Case=Ideation']
+Hc * Primary_Use_Case=Summarizing_Reading,['Primary_Use_Case=Summarizing_Reading']
+Primary_Use_Case=Ideation * Prompt_Engineering_Skill=Beginner,['Primary_Use_Case=Ideation']
+Primary_Use_Case=Ideation * Prompt_Engineering_Skill=Intermediate,['Primary_Use_Case=Ideation']
+Primary_Use_Case=Summarizing_Reading * Prompt_Engineering_Skill=Intermediate,['Primary_Use_Case=Summarizing_Reading']
