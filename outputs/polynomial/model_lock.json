@@ -1,0 +1,9 @@
+{
+  "model_type": "Polynomial_Ridge_Regression",
+  "degree": 4,
+  "alpha": 0.0001,
+  "input_features_count": 12,
+  "validation_mse": 0.02444863516406487,
+  "validation_r2": 0.9011933353113413,
+  "artifact_path": "outputs/polynomial/models/selected_polynomial_pipeline.joblib"
+}
