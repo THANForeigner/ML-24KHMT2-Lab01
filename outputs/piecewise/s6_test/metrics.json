@@ -1,0 +1,17 @@
+{
+  "model": "S6",
+  "status": "executed",
+  "n": 7500,
+  "fit_scope": "train",
+  "predictor_terms": 52,
+  "model_sha256": "da7cf9d77a8943af283ba3e679542b2f19a132b2c9bf43dc3e46c82e562d2b67",
+  "test_sha256": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b",
+  "mae": 0.11609016712035383,
+  "mse": 0.021235463887503286,
+  "rmse": 0.14572393038723352,
+  "r2": 0.9141581540728951,
+  "clipped": false,
+  "pred_below_0": 0,
+  "pred_above_4": 291,
+  "completed_at_utc": "2026-11-24T06:22:43.547981+00:00"
+}
