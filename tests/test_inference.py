@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from lab01_ml.data.loader import get_partition_path
 from lab01_ml.features.engineering import INPUTS
 from lab01_ml.models.training import pipeline, metrics
 from lab01_ml.models.inference import predict_student
@@ -12,7 +13,8 @@ from lab01_ml.models.inference import predict_student
 class InferenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.frame = pd.read_csv(Path(__file__).resolve().parents[1]/'data/splits/train.csv').head(1000)
+        root = Path(__file__).resolve().parents[1]
+        cls.frame = pd.read_csv(get_partition_path(root, 'train')).head(1000)
         cls.model = pipeline(3).fit(cls.frame[INPUTS], cls.frame['Post_Semester_GPA'])
         cls.profile = cls.frame.iloc[0][INPUTS].to_dict()
 
