@@ -1,4 +1,4 @@
-"""Build the formal Polynomial Linear Regression notebook for Lab 01."""
+"""Build the formal Polynomial Linear Regression notebook for Lab 01 with comprehensive diagnostic figures."""
 from pathlib import Path
 import nbformat as nbf
 
@@ -78,6 +78,11 @@ if ROOT is None:
 
 sys.path.insert(0, str(ROOT / 'src'))
 from lab01_ml.models.factory import create_polynomial_pipeline
+from lab01_ml.visualization.plots import (
+    plot_gpa_distribution, plot_ai_hours_distribution,
+    plot_ai_hours_vs_gpa_change, plot_group_heatmap,
+    plot_residuals
+)
 
 DATA_DIR = ROOT / 'data'
 OUTPUT_DIR = ROOT / 'outputs/polynomial'
@@ -133,10 +138,34 @@ for col in excluded_cols:
 print(f"[VERIFICATION] Da xac nhan loai bo hoan toan cac bien ro ri: {excluded_cols}")
 """))
 
-# Cell 5: Pipeline Description Markdown
+# Cell 5: Train EDA Markdown
 nb.cells.append(nbf.v4.new_markdown_cell("""---
-# 3. Pipeline Tiền xử lý & Mở rộng Đa thức Tinh gọn
-## 3.1 Cấu trúc tiền xử lý và mở rộng đa thức trên các biến số liên tục
+# 3. Phân tích Khám phá Dữ liệu Huấn luyện (Exploratory Data Analysis)
+## 3.1 Khảo sát phân phối và mối liên hệ phi tuyến ban đầu trên tập Train
+"""))
+
+# Cell 6: Train EDA Code (Figures 1 - 4)
+nb.cells.append(nbf.v4.new_code_cell("""print("[INFO] Sinh bo bieu do kham pha phan phoi tap Train...")
+
+fig1, ax1 = plot_gpa_distribution(train_df, save_path=FIG_DIR / '01_gpa_distribution.png')
+plt.show()
+
+fig2, ax2 = plot_ai_hours_distribution(train_df, save_path=FIG_DIR / '02_ai_hours.png')
+plt.show()
+
+fig3, ax3 = plot_ai_hours_vs_gpa_change(train_df, save_path=FIG_DIR / '03_ai_gpa_change.png')
+plt.show()
+
+fig4, ax4 = plot_group_heatmap(train_df, save_path=FIG_DIR / '04_group_heatmap.png')
+plt.show()
+
+print(f"[INFO] Da luu 4 bieu do kham pha vao: {FIG_DIR}")
+"""))
+
+# Cell 7: Pipeline Description Markdown
+nb.cells.append(nbf.v4.new_markdown_cell("""---
+# 4. Pipeline Tiền xử lý & Mở rộng Đa thức Tinh gọn
+## 4.1 Cấu trúc tiền xử lý và mở rộng đa thức trên các biến số liên tục
 
 Mở rộng đa thức được thực hiện tập trung trên **4 biến số liên tục**:
 $$\\mathbf{x}_{num} = [\\text{Pre\\_GPA}, \\text{Study\\_Hours}, \\text{GenAI\\_Hours}, \\text{Tool\\_Diversity}]$$
@@ -144,7 +173,7 @@ $$\\mathbf{x}_{num} = [\\text{Pre\\_GPA}, \\text{Study\\_Hours}, \\text{GenAI\\_
 - Biến nhị phân (`Paid_Subscription`) được giữ nguyên dưới dạng {0, 1}.
 """))
 
-# Cell 6: Pipeline Code
+# Cell 8: Pipeline Code
 nb.cells.append(nbf.v4.new_code_cell("""def transform_pipeline(train_data, val_data, use_group_d=False, degree=1):
     cat_cols = cat_cols_abc + (cat_cols_d if use_group_d else [])
 
@@ -185,21 +214,22 @@ nb.cells.append(nbf.v4.new_code_cell("""def transform_pipeline(train_data, val_d
 print("[INFO] Da thiet lap thanh cong pipeline tien xu ly.")
 """))
 
-# Cell 7: Experiment Markdown
+# Cell 9: Experiment Markdown
 nb.cells.append(nbf.v4.new_markdown_cell("""---
-# 4. Thực nghiệm So sánh Đa thức (Degrees 1 - 6) trên Cả 2 Phiên bản
-## 4.1 Đánh giá Đa thức kết hợp điều chuẩn Ridge và Lasso
+# 5. Thực nghiệm So sánh Đa thức (Degrees 1 - 6) & 5-Fold Cross Validation
+## 5.1 Đánh giá Đa thức kết hợp điều chuẩn Ridge và Lasso
 
-Quét bậc đa thức từ $d = 1$ đến $d = 6$ với các thuật toán:
-- **OLS Baseline**: Hồi quy tuyến tính thông thường không phạt.
-- **Ridge**: Điều chuẩn $L_2$ giải quyết đa cộng tuyến từ các số hạng bậc cao.
-- **Lasso**: Điều chuẩn $L_1$ chọn lọc đặc trưng thưa (sparse feature selection).
+Quét bậc đa thức từ $d = 1$ đến $d = 6$ với:
+- **5-Fold Cross Validation trên tập Train**: Đo lường trung bình và độ lệch chuẩn của RMSE.
+- **Đối chiếu trên tập Validation**: Đo lường $\text{MSE}_{val}$ và $R^2_{val}$.
 """))
 
-# Cell 8: Experiment Execution Code
+# Cell 10: Experiment Execution Code
 nb.cells.append(nbf.v4.new_code_cell("""degrees = [1, 2, 3, 4, 5, 6]
 alphas_ridge = [1e-3, 1e-2, 0.1, 1.0, 10.0, 50.0, 100.0]
 alphas_lasso = [1e-4, 5e-4, 1e-3, 5e-3, 1e-2]
+
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
 
 results_all = []
 trained_models_storage = {}
@@ -214,6 +244,16 @@ for version_name, use_d in [('Version 1 (No Group D)', False), ('Version 2 (With
             train_df, val_df, use_group_d=use_d, degree=deg
         )
 
+        # 5-fold CV folds tren train cho Ridge mac dinh
+        cv_rmses = []
+        for tr_idx, hld_idx in kf.split(X_tr):
+            r_fold = Ridge(alpha=50.0, random_state=42)
+            r_fold.fit(X_tr[tr_idx], y_tr[tr_idx])
+            pred_fold = r_fold.predict(X_tr[hld_idx])
+            cv_rmses.append(np.sqrt(mean_squared_error(y_tr[hld_idx], pred_fold)))
+        cv_rmse_mean = float(np.mean(cv_rmses))
+        cv_rmse_std = float(np.std(cv_rmses))
+
         # 1. OLS Baseline
         ols = LinearRegression()
         ols.fit(X_tr, y_tr)
@@ -223,7 +263,8 @@ for version_name, use_d in [('Version 1 (No Group D)', False), ('Version 2 (With
         r2_va_ols = r2_score(y_va, va_pred_ols)
         results_all.append({
             'version': version_name, 'degree': deg, 'model': 'OLS', 'alpha': None, 'features': n_feats,
-            'train_mse': mse_tr_ols, 'val_mse': mse_va_ols, 'val_r2': r2_va_ols
+            'train_mse': mse_tr_ols, 'val_mse': mse_va_ols, 'val_rmse': np.sqrt(mse_va_ols), 'val_r2': r2_va_ols,
+            'cv_rmse_mean': cv_rmse_mean, 'cv_rmse_std': cv_rmse_std
         })
         trained_models_storage[(version_name, deg, 'OLS')] = ols
 
@@ -243,7 +284,8 @@ for version_name, use_d in [('Version 1 (No Group D)', False), ('Version 2 (With
         tr_mse_ridge = mean_squared_error(y_tr, best_ridge_model.predict(X_tr))
         results_all.append({
             'version': version_name, 'degree': deg, 'model': 'Ridge', 'alpha': best_ridge_alpha, 'features': n_feats,
-            'train_mse': tr_mse_ridge, 'val_mse': best_ridge_mse, 'val_r2': r2_ridge
+            'train_mse': tr_mse_ridge, 'val_mse': best_ridge_mse, 'val_rmse': np.sqrt(best_ridge_mse), 'val_r2': r2_ridge,
+            'cv_rmse_mean': cv_rmse_mean, 'cv_rmse_std': cv_rmse_std
         })
         trained_models_storage[(version_name, deg, 'Ridge')] = best_ridge_model
 
@@ -263,7 +305,8 @@ for version_name, use_d in [('Version 1 (No Group D)', False), ('Version 2 (With
         tr_mse_lasso = mean_squared_error(y_tr, best_lasso_model.predict(X_tr))
         results_all.append({
             'version': version_name, 'degree': deg, 'model': 'Lasso', 'alpha': best_lasso_alpha, 'features': n_feats,
-            'train_mse': tr_mse_lasso, 'val_mse': best_lasso_mse, 'val_r2': r2_lasso
+            'train_mse': tr_mse_lasso, 'val_mse': best_lasso_mse, 'val_rmse': np.sqrt(best_lasso_mse), 'val_r2': r2_lasso,
+            'cv_rmse_mean': cv_rmse_mean, 'cv_rmse_std': cv_rmse_std
         })
         trained_models_storage[(version_name, deg, 'Lasso')] = best_lasso_model
 
@@ -275,14 +318,15 @@ print(f"\\n[INFO] Da luu bang ket qua so sanh vao: {TABLE_DIR / 'model_compariso
 display(df_comparison.sort_values(by=['version', 'val_mse']).head(12))
 """))
 
-# Cell 9: Bias-Variance Analysis Markdown
+# Cell 11: Bias-Variance & Model Tuning Visualizations Markdown
 nb.cells.append(nbf.v4.new_markdown_cell(r"""---
-# 5. Lựa chọn Mô hình Tối ưu ($\arg\min \text{MSE}_{val}$) & Bias-Variance Tradeoff
-## 5.1 Phân tích đường cong đánh đổi Độ chệch - Phương sai trên tập Train và Validation
+# 6. Lựa chọn Mô hình Tối ưu ($\arg\min \text{MSE}_{val}$) & Bias-Variance Tradeoff
+## 6.1 Biểu đồ đánh đổi Bias-Variance, so sánh CV RMSE và Validation RMSE/R²
 """))
 
-# Cell 10: Bias-Variance Plot Code
-nb.cells.append(nbf.v4.new_code_cell("""fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+# Cell 12: Model Tuning Code (Figures 5, 6, 7)
+nb.cells.append(nbf.v4.new_code_cell("""# Bieu do 5: Bias-Variance Tradeoff
+fig5, axes = plt.subplots(1, 2, figsize=(16, 6))
 
 for idx, v_name in enumerate(['Version 1 (No Group D)', 'Version 2 (With Group D)']):
     sub = df_comparison[(df_comparison['version'] == v_name) & (df_comparison['model'] == 'Ridge')].sort_values(by='degree')
@@ -295,15 +339,41 @@ for idx, v_name in enumerate(['Version 1 (No Group D)', 'Version 2 (With Group D
     b_val_mse = best_v_row['val_mse']
     axes[idx].scatter([b_deg], [b_val_mse], color='#ff7f0e', s=200, zorder=5, edgecolor='black', linewidth=2, label=f'Toi uu: Degree {b_deg}')
 
-    axes[idx].set_title(f'Hinh 1.{idx+1}: {v_name}\\n(Diem cuc tieu Validation: Degree {b_deg})', fontsize=12, fontweight='bold')
+    axes[idx].set_title(f'Hinh 5.{idx+1}: {v_name}\\n(Diem cuc tieu Validation: Degree {b_deg})', fontsize=12, fontweight='bold')
     axes[idx].set_xlabel('Bac da thuc (Degree)', fontsize=11)
     axes[idx].set_ylabel('Sai so Binh phuong Trung binh (MSE)', fontsize=11)
     axes[idx].set_xticks(degrees)
     axes[idx].legend(frameon=True)
 
 plt.tight_layout()
-fig_path = FIG_DIR / '01_bias_variance_tradeoff.png'
-plt.savefig(fig_path, dpi=300)
+plt.savefig(FIG_DIR / '05_bias_variance_tradeoff.png', dpi=300)
+plt.show()
+
+# Bieu do 6: So sanh 5-Fold CV RMSE
+v2_ridge = df_comparison[(df_comparison['version'] == 'Version 2 (With Group D)') & (df_comparison['model'] == 'Ridge')].sort_values(by='degree')
+fig6, ax6 = plt.subplots(figsize=(8, 4))
+labels = [f"Degree {d}" for d in v2_ridge['degree']]
+ax6.bar(labels, v2_ridge['cv_rmse_mean'], yerr=v2_ridge['cv_rmse_std'], capsize=4, color='cornflowerblue', edgecolor='navy', alpha=0.85)
+ax6.set_title('Hinh 6: So sanh 5-Fold CV RMSE tren tap Train theo Bac Da thuc (Ridge)', fontsize=12, fontweight='bold')
+ax6.set_xlabel('Bac da thuc (Polynomial Degree)', fontsize=10)
+ax6.set_ylabel('Mean CV RMSE ± SD', fontsize=10)
+fig6.tight_layout()
+fig6.savefig(FIG_DIR / '06_cv_rmse_comparison.png', dpi=300)
+plt.show()
+
+# Bieu do 7: So sanh Validation RMSE va R2
+fig7, (ax7_1, ax7_2) = plt.subplots(1, 2, figsize=(14, 4))
+deg_labels = [f"D{d}" for d in v2_ridge['degree']]
+ax7_1.bar(deg_labels, v2_ridge['val_rmse'], color='salmon', edgecolor='firebrick', alpha=0.85)
+ax7_1.set_title('Hinh 7.1: Validation RMSE qua cac Bac (Ridge)', fontsize=11, fontweight='bold')
+ax7_1.set_ylabel('Validation RMSE', fontsize=10)
+
+ax7_2.bar(deg_labels, v2_ridge['val_r2'], color='mediumseagreen', edgecolor='darkgreen', alpha=0.85)
+ax7_2.set_title('Hinh 7.2: Validation R2 qua cac Bac (Ridge)', fontsize=11, fontweight='bold')
+ax7_2.set_ylabel('Validation R2', fontsize=10)
+ax7_2.set_ylim(0.88, 0.91)
+fig7.tight_layout()
+fig7.savefig(FIG_DIR / '07_validation_comparison.png', dpi=300)
 plt.show()
 
 overall_best = df_comparison.loc[df_comparison['val_mse'].idxmin()]
@@ -320,10 +390,10 @@ print(f\"\"\"
 \"\"\")
 """))
 
-# Cell 11: Model Serialization & Lock Markdown
+# Cell 13: Model Serialization & Lock Markdown
 nb.cells.append(nbf.v4.new_markdown_cell("""---
-# 6. Đóng gói Pipeline Tối ưu & Khóa Mô hình (Model Lock)
-## 6.1 Khởi tạo Pipeline end-to-end hoàn chỉnh và xuất xưởng file model.joblib
+# 7. Đóng gói Pipeline Tối ưu & Khóa Mô hình (Model Lock)
+## 7.1 Khởi tạo Pipeline end-to-end hoàn chỉnh và xuất xưởng file model.joblib
 
 Pipeline bao gồm:
 1. `StandardScaler` + `PolynomialFeatures(degree=4)` + `StandardScaler` trên 4 biến số liên tục.
@@ -332,9 +402,8 @@ Pipeline bao gồm:
 4. `Ridge(alpha=50.0)`.
 """))
 
-# Cell 12: Model Serialization Code
-nb.cells.append(nbf.v4.new_code_cell("""# Xay dung pipeline tu factory
-pipe_optimal = create_polynomial_pipeline(
+# Cell 14: Model Serialization Code
+nb.cells.append(nbf.v4.new_code_cell("""pipe_optimal = create_polynomial_pipeline(
     degree=int(overall_best['degree']),
     model_type=overall_best['model'],
     alpha=overall_best['alpha'],
@@ -368,10 +437,73 @@ print(f"[INFO] Da ghi thong tin model lock vao:    {OUTPUT_DIR / 'model_lock.jso
 print(f"[VALIDATION VERIFICATION] Pipe Val MSE: {val_mse_pipe:.6f} | Val R2: {val_r2_pipe:.4f}")
 """))
 
-# Cell 13: Test Set Protocol Markdown
+# Cell 15: Diagnostics Markdown
 nb.cells.append(nbf.v4.new_markdown_cell("""---
-# 7. Giao thức Bảo vệ Tập Test (Test Set Anti-Leakage Protocol)
-## 7.1 Đánh giá Độc lập sau khi Khóa Mô hình
+# 8. Chẩn đoán Mô hình Tối ưu: Hệ số Trọng số, Phần dư & Phản ứng Phi tuyến
+## 8.1 Trực quan hóa Top hệ số, kiểm tra giả định Homoscedasticity và đáp ứng What-if
+"""))
+
+# Cell 16: Diagnostics Code (Figures 8, 9, 10)
+nb.cells.append(nbf.v4.new_code_cell("""# Bieu do 8: Top 20 he so da thuc quan trong nhat
+prep_step = pipe_optimal.named_steps['preprocessor']
+reg_step = pipe_optimal.named_steps['regressor']
+feat_names = prep_step.get_feature_names_out()
+coef_values = reg_step.coef_
+
+df_coef = pd.DataFrame({
+    'feature': feat_names,
+    'coefficient': coef_values,
+    'abs_coef': np.abs(coef_values)
+}).sort_values(by='abs_coef', ascending=False)
+df_coef.to_csv(TABLE_DIR / 'polynomial_coefficients.csv', index=False)
+
+top20 = df_coef.head(20).iloc[::-1]
+fig8, ax8 = plt.subplots(figsize=(10, 7))
+bar_colors = ['navy' if c > 0 else 'crimson' for c in top20['coefficient']]
+ax8.barh(top20['feature'], top20['coefficient'], color=bar_colors, alpha=0.85)
+ax8.axvline(0, color='black', linewidth=0.8)
+ax8.set_title('Hinh 8: Top 20 He so Da thuc co Tac dong Manh nhat (Degree 4 Ridge)', fontsize=12, fontweight='bold')
+ax8.set_xlabel('Gia tri he so chuan hoa (Standardized Beta)', fontsize=10)
+ax8.set_ylabel('Dac trung da thuc', fontsize=10)
+fig8.tight_layout()
+fig8.savefig(FIG_DIR / '08_coefficient_magnitudes.png', dpi=300)
+plt.show()
+
+# Bieu do 9: Phan tich phan du (Residuals vs Fitted) tren tap Validation
+fig9, (ax9_1, ax9_2) = plot_residuals(val_df[target_col], val_pred_optimal, save_path=FIG_DIR / '09_residuals_vs_fitted.png')
+plt.show()
+
+# Bieu do 10: Duong cong phan ung phi tuyen What-if theo Gio AI
+sample_profile = train_df.iloc[0].to_dict()
+ai_hours_grid = np.linspace(0, 40, 50)
+target_use_cases = ['Summarizing_Reading', 'Coding Assistance' if 'Coding Assistance' in train_df['Primary_Use_Case'].values else 'Debugging/Troubleshooting', 'Direct_Answer_Generation']
+target_skills = ['Beginner', 'Advanced']
+
+fig10, ax10 = plt.subplots(figsize=(10, 5))
+for u in target_use_cases:
+    for s in target_skills:
+        rows = [
+            sample_profile | {'Weekly_GenAI_Hours': float(h), 'Primary_Use_Case': u, 'Prompt_Engineering_Skill': s}
+            for h in ai_hours_grid
+        ]
+        preds = pipe_optimal.predict(pd.DataFrame(rows))
+        ax10.plot(ai_hours_grid, preds, label=f"{u} | Skill: {s}", linewidth=1.8)
+
+ax10.set_title('Hinh 10: Dap ung GPA du doan theo Gio AI theo cac Nhom Kich ban What-if (Degree 4 Ridge)', fontsize=12, fontweight='bold')
+ax10.set_xlabel('So gio dung AI moi tuan (Weekly_GenAI_Hours)', fontsize=10)
+ax10.set_ylabel('Diem GPA Du doan (Predicted GPA)', fontsize=10)
+ax10.legend(fontsize=8, loc='best')
+fig10.tight_layout()
+fig10.savefig(FIG_DIR / '10_what_if_response_curves.png', dpi=300)
+plt.show()
+
+print(f"[INFO] Da luu thanh cong cac bieu do chan doan 08, 09, 10 vao: {FIG_DIR}")
+"""))
+
+# Cell 17: Test Set Protocol Markdown
+nb.cells.append(nbf.v4.new_markdown_cell("""---
+# 9. Giao thức Bảo vệ Tập Test (Test Set Anti-Leakage Protocol)
+## 9.1 Đánh giá Độc lập sau khi Khóa Mô hình
 
 Theo quy định nghiêm ngặt của dự án Lab 01:
 - Tập Test không được sử dụng để tinh chỉnh siêu tham số hoặc lựa chọn mô hình.
@@ -379,7 +511,7 @@ Theo quy định nghiêm ngặt của dự án Lab 01:
 - Chỉ khi nhóm thông qua split chung và thiết lập biến môi trường `LAB_GROUP_SPLIT_APPROVED='yes'`, mô hình tối ưu đã khóa mới được đánh giá một lần duy nhất trên tập Test.
 """))
 
-# Cell 14: Test Evaluation Code
+# Cell 18: Test Evaluation Code (Figure 11)
 nb.cells.append(nbf.v4.new_code_cell("""test_approved = os.environ.get('LAB_GROUP_SPLIT_APPROVED', '').strip().lower() == 'yes'
 test_path = DATA_DIR / 'test/dataset.csv'
 
@@ -427,29 +559,30 @@ else:
 ------------------------------------------------------------------------
 \"\"\")
 
-    # Bieu do Actual vs Predicted tren tap Test
-    fig, ax = plt.subplots(figsize=(7, 7))
-    ax.scatter(test_df[target_col], test_preds, alpha=0.15, color='#1f77b4', s=16)
-    ax.plot([1.0, 4.0], [1.0, 4.0], color='#d62728', linestyle='--', linewidth=2.0, label='Duong tham chieu y = x')
-    ax.set_title('Hinh 2: Tuong quan Thuc te vs Du doan tren tap Test\\n(Polynomial Ridge Degree 4 - Schema 12 bien)', fontsize=12, fontweight='bold')
-    ax.set_xlabel('Diem GPA Thuc te (Actual Post_Semester_GPA)', fontsize=11)
-    ax.set_ylabel('Diem GPA Du doan (Predicted Post_Semester_GPA)', fontsize=11)
-    ax.set_xlim(1.0, 4.05)
-    ax.set_ylim(1.0, 4.05)
-    ax.legend(frameon=True)
-    plt.tight_layout()
-    plt.savefig(FIG_DIR / '02_actual_vs_predicted_test.png', dpi=300)
+    # Bieu do 11: Actual vs Predicted tren tap Test
+    fig11, ax11 = plt.subplots(figsize=(7, 7))
+    ax11.scatter(test_df[target_col], test_preds, alpha=0.15, color='#1f77b4', s=16)
+    ax11.plot([1.0, 4.0], [1.0, 4.0], color='#d62728', linestyle='--', linewidth=2.0, label='Duong tham chieu y = x')
+    ax11.set_title('Hinh 11: Tuong quan Thuc te vs Du doan tren tap Test\\n(Polynomial Ridge Degree 4 - Schema 12 bien)', fontsize=12, fontweight='bold')
+    ax11.set_xlabel('Diem GPA Thuc te (Actual Post_Semester_GPA)', fontsize=11)
+    ax11.set_ylabel('Diem GPA Du doan (Predicted Post_Semester_GPA)', fontsize=11)
+    ax11.set_xlim(1.0, 4.05)
+    ax11.set_ylim(1.0, 4.05)
+    ax11.legend(frameon=True)
+    fig11.tight_layout()
+    fig11.savefig(FIG_DIR / '11_actual_vs_predicted_test.png', dpi=300)
     plt.show()
+    print(f"[INFO] Da luu bieu do danh gia test vao: {FIG_DIR / '11_actual_vs_predicted_test.png'}")
 """))
 
-# Cell 15: Conclusion Markdown
+# Cell 19: Conclusion Markdown
 nb.cells.append(nbf.v4.new_markdown_cell(r"""---
-# 8. Kết luận & Đóng góp Nghiên cứu theo Schema 12 Đặc trưng
-## 8.1 Tổng kết phát hiện thực nghiệm và khuyến nghị kỹ thuật
+# 10. Kết luận & Đóng góp Nghiên cứu theo Schema 12 Đặc trưng
+## 10.1 Tổng kết phát hiện thực nghiệm và khuyến nghị kỹ thuật
 
 1. **Hiệu quả của việc loại bỏ các biến rò rỉ (Leakage Prevention)**:
    - Việc loại bỏ hoàn toàn `Skill_Retention_Score` và `Burnout_Risk_Level` đảm bảo mô hình phản ánh đúng kịch bản dự đoán đầu kỳ hoặc giả định What-if mà không vi phạm tính nhân quả theo thời gian.
-   - Mô hình vẫn đạt hệ số xác định cao ($R^2 \\approx 0,901$) nhờ khai thác quan hệ phi tuyến giữa các biến cốt lõi: `Pre_Semester_GPA`, `Traditional_Study_Hours`, `Weekly_GenAI_Hours` và `Tool_Diversity`.
+   - Mô hình vẫn đạt hệ số xác định cao ($R^2 \approx 0,901$) nhờ khai thác quan hệ phi tuyến giữa các biến cốt lõi: `Pre_Semester_GPA`, `Traditional_Study_Hours`, `Weekly_GenAI_Hours` và `Tool_Diversity`.
 
 2. **So sánh Đóng góp của Nhóm D (Tâm lý thi cử)**:
    - Sai số Validation giữa Version 1 (không dùng D) và Version 2 (dùng D) có chênh lệch rất nhỏ ($MSE: 0,02462$ so với $0,02449$). Điều này chứng minh `Pre_Semester_GPA` và thói quen học tập đóng vai trò then chốt, trong khi các biến tâm lý đóng góp một lượng điều chỉnh biên.
