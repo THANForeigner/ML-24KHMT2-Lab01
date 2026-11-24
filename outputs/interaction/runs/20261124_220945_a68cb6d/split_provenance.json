@@ -1,0 +1,15 @@
+{
+  "run_id": "20261124_220945_a68cb6d",
+  "type": "pre_existing_frozen_csv",
+  "smoke_test": false,
+  "sha256": {
+    "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
+    "validation": "b3106a38788934ce332f16387a70c40729eaccd690aaa7e20727d7c51fbb9fdf",
+    "test": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b"
+  },
+  "counts": {
+    "train": 35000,
+    "validation": 7500,
+    "test": 7500
+  }
+}
