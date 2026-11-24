@@ -1,8 +1,8 @@
 {
-  "run_id": "20261123_200230_56e998c",
+  "run_id": "20261124_144111_da6984c",
   "selected_model": "I3",
   "selection_rule": "5-fold train CV RMSE, tie 0.1% -> fewer terms",
-  "selection_date_utc": "2026-11-23T13:58:37.830708+00:00",
+  "selection_date_utc": "2026-11-24T08:04:10.381462+00:00",
   "test_used_to_select": false,
   "frozen_csv_sha256": {
     "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
