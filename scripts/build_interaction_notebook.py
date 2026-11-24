@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT/'src'))
 import numpy as np, pandas as pd, matplotlib.pyplot as plt, seaborn as sns, joblib, json
 from IPython.display import display
 from lab01_ml.features.engineering import InteractionFeatures, INPUTS, H, P, S
+from lab01_ml.data.loader import get_partition_path
 from lab01_ml.models.training import load_frozen, development, metrics, TARGET
 from lab01_ml.models.inference import predict_student
 OUT = ROOT/'outputs/interaction'; FIG = OUT/'figures'; TABLES = OUT/'tables'; MODELS = OUT/'models'
@@ -117,7 +118,7 @@ lock={'selected':selected,'selection':'CV RMSE, 0.1% tie then fewer terms','fit_
 joblib.dump(models[selected], MODELS/'selected.joblib')
 all_metrics={'selected':selected,'cv_rmse_mean':float(comparison.set_index('model').loc[selected,'cv_rmse_mean']),'validation':metrics(val[TARGET],valpred[selected]),'final_test':{'status':'not executed','reason':'group split approval missing'}}
 if os.environ.get('LAB_GROUP_SPLIT_APPROVED') == 'yes':
-    test=pd.read_csv(ROOT/'data/splits/test.csv'); yp=models[selected].predict(test.drop(columns=[TARGET])); final=metrics(test[TARGET],yp)
+    test=pd.read_csv(get_partition_path(ROOT, 'test')); yp=models[selected].predict(test.drop(columns=[TARGET])); final=metrics(test[TARGET],yp)
     final.update({'below_0_pct':float(100*np.mean(yp<0)),'above_4_pct':float(100*np.mean(yp>4))})
     all_metrics['final_test']={'status':'executed',**final}; print('Final test:', final)
 else:

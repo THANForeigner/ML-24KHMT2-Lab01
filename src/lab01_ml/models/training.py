@@ -12,6 +12,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline
 from lab01_ml.features.engineering import InteractionFeatures
+from lab01_ml.data.loader import load_frozen, get_partition_path
 
 TARGET = 'Post_Semester_GPA'
 
@@ -24,42 +25,6 @@ def pipeline(model=3, scenario='full'):
     return Pipeline([('features', InteractionFeatures(model=model, scenario=scenario)),
                      ('ols', LinearRegression(fit_intercept=True))])
 
-def load_frozen(root):
-    root = Path(root)
-    files = {'train': root/'data/splits/train.csv', 'validation': root/'data/splits/val.csv', 'test': root/'data/splits/test.csv'}
-    meta = json.loads((root/'data/metadata.json').read_text(encoding='utf-8'))
-    assignment_path = root/'data/assignments.csv'
-    assignment_hash = hashlib.sha256(assignment_path.read_bytes()).hexdigest()
-    if assignment_hash != meta['assignment_sha256']:
-        raise ValueError('Assignment hash differs from data/metadata.json; do not overwrite the split')
-    raw_path = root/'data/raw/ai_student_impact_dataset (1).csv'
-    if raw_path.exists() and hashlib.sha256(raw_path.read_bytes()).hexdigest() != meta['source_sha256']:
-        raise ValueError(f'Raw data hash mismatch: {raw_path}')
-    assignment = pd.read_csv(assignment_path, dtype={'Student_ID': str})
-    if not assignment.Student_ID.is_unique:
-        raise ValueError('Duplicate Student_ID in data/assignments.csv')
-    frames, seen, hashes = {}, set(), {}
-    for name, path in files.items():
-        if not path.exists():
-            raise FileNotFoundError(f'Missing frozen split: {path}')
-        hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-        key = f'{name}/dataset.csv'
-        if hashes[name] != meta['dataset_sha256'][key]:
-            raise ValueError(f'Split hash mismatch: {path}; do not regenerate or overwrite')
-        # The holdout is audited by ID only; its features and target are not read here.
-        frames[name] = pd.read_csv(path, dtype={'Student_ID': str}, usecols=['Student_ID'] if name == 'test' else None)
-        ids = frames[name]['Student_ID']
-        if not ids.is_unique or seen.intersection(ids):
-            raise ValueError(f'Duplicate or overlapping IDs in {path}')
-        if set(ids) != set(assignment.loc[assignment['split'] == name, 'Student_ID']):
-            raise ValueError(f'Assignment does not match split: {path}')
-        seen.update(ids)
-    return frames, {'source_sha256': meta['source_sha256'], 'partition_sha256': hashes,
-                    'assignment_sha256': assignment_hash,
-                    'counts': {k: len(v) for k, v in frames.items()},
-                    'group_approval': 'unconfirmed', 'method': meta.get('method'), 'cv_seed': 42,
-                    'versions': {'python': platform.python_version(), 'numpy': np.__version__,
-                                 'pandas': pd.__version__, 'scikit_learn': sklearn.__version__}}
 
 def development(train, validation, include_i4=True):
     X, y = train.drop(columns=[TARGET]), train[TARGET]

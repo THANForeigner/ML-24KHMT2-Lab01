@@ -6,12 +6,14 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from lab01_ml.data.loader import get_partition_path
 from lab01_ml.features.engineering import InteractionFeatures, INPUTS
 
 
 class InteractionTests(unittest.TestCase):
     def setUp(self):
-        self.train = pd.read_csv(Path(__file__).resolve().parents[1] / 'data/splits/train.csv')
+        root = Path(__file__).resolve().parents[1]
+        self.train = pd.read_csv(get_partition_path(root, 'train'))
 
     def test_counts_and_hierarchy(self):
         for model, count in enumerate((39, 41, 45, 53, 55)):

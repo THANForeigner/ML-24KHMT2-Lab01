@@ -1,5 +1,20 @@
 # Lab 01 — AI Impact on Students EDA
 
+## Elastic Net Regression — trạng thái hiện tại
+
+Notebook: `notebooks/elastic_net_regression.ipynb`; mã nguồn chính nằm trong `src/lab01_ml/features/elastic_net_features.py` và `src/lab01_ml/models/`. Các file chia sẵn trong `data/splits/` được kiểm tra với `data/assignments.csv` và `data/metadata.json`; không tự tạo hoặc ghi đè split.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe scripts/build_elastic_net_notebook.py
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/execute_elastic_net_notebook.py
+```
+
+Lệnh cuối chạy notebook trong kernel sạch bằng `nbclient`. Đầu ra và notebook đã chạy nằm trong `outputs/elastic_net/`. Khi chưa có xác nhận split chung, notebook chỉ thực hiện 5-fold CV trên `train` và đánh giá trên `validation`, ghi rõ `final test: not executed` và không đọc target test. Chỉ sau khi nhóm thực sự xác nhận split và protocol, người chạy có thể đặt `$env:LAB_GROUP_SPLIT_APPROVED = 'yes'` trước lệnh thực thi để cho phép đánh giá test sau model lock; không dùng test chọn model.
+
+Model joblib được lưu tại `outputs/elastic_net/models/selected_elastic_net_pipeline.joblib`, nhận đầu vào là đúng 12 raw features thuộc nhóm A–D. Kết quả mô tả liên hệ trên dữ liệu synthetic, không chứng minh tác động nhân quả.
+
 ## Interaction Linear Regression — trạng thái hiện tại
 
 Notebook: `notebooks/interaction_linear_regression.ipynb`; mã nguồn chính nằm trong `src/lab01_ml/features/engineering.py` và `src/lab01_ml/models/`. Các file chia sẵn trong `data/splits/` được kiểm tra với `data/assignments.csv` và `data/metadata.json`; không tự tạo hoặc ghi đè split. Metadata mô tả split hiện tại khác split EDA gốc, và xác nhận split chung của nhóm vẫn đang chờ.

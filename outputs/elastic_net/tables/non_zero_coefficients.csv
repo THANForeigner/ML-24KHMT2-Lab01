@@ -1,0 +1,55 @@
+feature,coefficient,abs_coefficient,is_non_zero
+Pc,0.4584573883899902,0.4584573883899902,True
+Sc,0.06950397408032087,0.06950397408032087,True
+Primary_Use_Case=Debugging/Troubleshooting,0.0631221167627359,0.0631221167627359,True
+Hc * Primary_Use_Case=Direct_Answer_Generation,-0.04522264657026947,0.04522264657026947,True
+Year_of_Study=Senior,0.04192026101948745,0.04192026101948745,True
+Primary_Use_Case=Debugging/Troubleshooting * Prompt_Engineering_Skill=Intermediate,-0.04105199182285196,0.04105199182285196,True
+Primary_Use_Case=Debugging/Troubleshooting * Prompt_Engineering_Skill=Beginner,-0.040165833590257875,0.040165833590257875,True
+Year_of_Study=Graduate,0.03914232229360809,0.03914232229360809,True
+Year_of_Study=Junior,0.03446817117231569,0.03446817117231569,True
+Hc,0.03300511072757081,0.03300511072757081,True
+Hc^2,-0.022750407691634486,0.022750407691634486,True
+Primary_Use_Case=Direct_Answer_Generation,-0.02119224345373631,0.02119224345373631,True
+Year_of_Study=Sophomore,0.013658957538205172,0.013658957538205172,True
+Prompt_Engineering_Skill=Beginner,-0.0088657850398664,0.0088657850398664,True
+Prompt_Engineering_Skill=Intermediate,-0.008056141176674409,0.008056141176674409,True
+Institutional_Policy=Strict_Ban,-0.007020521818530459,0.007020521818530459,True
+Paid_Subscription,0.004333172418011005,0.004333172418011005,True
+Anxiety_Level_During_Exams=10,-0.0032781838286142476,0.0032781838286142476,True
+Perceived_AI_Dependency=7,-0.002331880023696313,0.002331880023696313,True
+Anxiety_Level_During_Exams=9,-0.0023169692782646434,0.0023169692782646434,True
+Hc * Primary_Use_Case=Ideation,0.0017402654732237464,0.0017402654732237464,True
+Primary_Use_Case=Ideation * Prompt_Engineering_Skill=Intermediate,0.001155204520952081,0.001155204520952081,True
+Institutional_Policy=Allowed_With_Citation,0.0009714458536894194,0.0009714458536894194,True
+Major_Category=Medical,0.000897420925625892,0.000897420925625892,True
+Hc * Prompt_Engineering_Skill=Intermediate,-0.0007433676707850765,0.0007433676707850765,True
+Primary_Use_Case=Summarizing_Reading * Prompt_Engineering_Skill=Intermediate,-0.0007048155328525353,0.0007048155328525353,True
+Hc * Primary_Use_Case=Summarizing_Reading,0.0006439850731492116,0.0006439850731492116,True
+Anxiety_Level_During_Exams=7,-0.0006312569173409288,0.0006312569173409288,True
+Primary_Use_Case=Ideation * Prompt_Engineering_Skill=Beginner,-0.0006086170805976264,0.0006086170805976264,True
+Perceived_AI_Dependency=3,0.0005957949759401829,0.0005957949759401829,True
+Perceived_AI_Dependency=10,0.0005491880112324371,0.0005491880112324371,True
+Anxiety_Level_During_Exams=8,-0.00045704320070690197,0.00045704320070690197,True
+Hc * Primary_Use_Case=Debugging/Troubleshooting,0.00031189697950966916,0.00031189697950966916,True
+Tool_Diversity,0.0002303121447614003,0.0002303121447614003,True
+Perceived_AI_Dependency=2,-2.2519061370288035e-05,2.2519061370288035e-05,True
+Major_Category=Business,-0.0,0.0,False
+Major_Category=Humanities,-0.0,0.0,False
+Major_Category=STEM,0.0,0.0,False
+Primary_Use_Case=Ideation,0.0,0.0,False
+Primary_Use_Case=Summarizing_Reading,-0.0,0.0,False
+Anxiety_Level_During_Exams=5,0.0,0.0,False
+Anxiety_Level_During_Exams=6,-0.0,0.0,False
+Anxiety_Level_During_Exams=2,0.0,0.0,False
+Perceived_AI_Dependency=6,-0.0,0.0,False
+Perceived_AI_Dependency=8,0.0,0.0,False
+Perceived_AI_Dependency=9,0.0,0.0,False
+Perceived_AI_Dependency=4,0.0,0.0,False
+Perceived_AI_Dependency=5,0.0,0.0,False
+Anxiety_Level_During_Exams=3,0.0,0.0,False
+Anxiety_Level_During_Exams=4,0.0,0.0,False
+Hc * Prompt_Engineering_Skill=Beginner,0.0,0.0,False
+Primary_Use_Case=Direct_Answer_Generation * Prompt_Engineering_Skill=Beginner,-0.0,0.0,False
+Primary_Use_Case=Direct_Answer_Generation * Prompt_Engineering_Skill=Intermediate,-0.0,0.0,False
+Primary_Use_Case=Summarizing_Reading * Prompt_Engineering_Skill=Beginner,0.0,0.0,False
