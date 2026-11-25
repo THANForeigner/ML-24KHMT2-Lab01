@@ -1,0 +1,17 @@
+{
+  "run_id": "20261125_105509_d606e49",
+  "selected": {
+    "Clipping": "M03",
+    "No clipping": "M03"
+  },
+  "frozen_test_sha256": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b",
+  "comparison_protocol": "paired_raw_vs_clip_0_4_v1",
+  "prediction_policies": [
+    "raw_ols",
+    "clip_0_4"
+  ],
+  "test_reused": false,
+  "previous_test_run_ids": [],
+  "metrics_path": "D:\\1_Study\\3.Year 3\\Semester_1\\Intro_ML\\Lab01\\outputs\\simple\\runs\\20261125_105509_d606e49\\metrics.json",
+  "recorded_utc": "2026-11-25T03:55:15.916218+00:00"
+}

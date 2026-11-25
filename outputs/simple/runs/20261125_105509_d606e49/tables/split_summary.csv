@@ -1,0 +1,4 @@
+split,n,percent
+train,35000,70.0
+validation,7500,15.0
+test,7500,15.0

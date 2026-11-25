@@ -1,0 +1,22 @@
+{
+  "run_id": "20261125_105509_d606e49",
+  "selected_model": {
+    "Clipping": "M03",
+    "No clipping": "M03"
+  },
+  "selection_rule": "validation RMSE per mode, ties by Model",
+  "prediction_policies": [
+    "raw_ols",
+    "clip_0_4"
+  ],
+  "test_used_to_select": false,
+  "selection_date_utc": "2026-11-25T03:55:12.905678+00:00",
+  "frozen_csv_sha256": {
+    "train": "9f2174454c59a1283e308b5a6b74c2f165f1694304706a08a6db8e82d5be1fd9",
+    "validation": "b3106a38788934ce332f16387a70c40729eaccd690aaa7e20727d7c51fbb9fdf",
+    "test": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b"
+  },
+  "train_n": 35000,
+  "validation_n": 7500,
+  "test_n": 7500
+}

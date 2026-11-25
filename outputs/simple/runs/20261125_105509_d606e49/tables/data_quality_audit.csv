@@ -1,0 +1,4 @@
+Split,Raw samples,Duplicates removed,Invalid numeric,Invalid domain,Missing ID,Total removed,Retained samples,Retention rate (%)
+Train,35000,0,0,0,0,0,35000,100.0
+Validation,7500,0,0,0,0,0,7500,100.0
+Test,7500,0,0,0,0,0,7500,100.0
