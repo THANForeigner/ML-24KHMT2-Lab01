@@ -1,0 +1,10 @@
+{
+  "model_name": "Polynomial_Ridge_Degree_4",
+  "optimal_degree": 4,
+  "optimal_alpha": 50.0,
+  "test_mse": 0.024163702815015464,
+  "test_rmse": 0.15544678451166324,
+  "test_mae": 0.12145708037695842,
+  "test_r2": 0.9023210952648144,
+  "sample_size": 7500
+}

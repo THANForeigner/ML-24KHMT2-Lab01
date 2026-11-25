@@ -31,6 +31,21 @@ Lệnh cuối chạy notebook trong kernel sạch bằng `nbclient`. Đầu ra v
 
 Model joblib chỉ được tải từ tệp do chính nhóm tạo và tin cậy. Kết quả mô tả liên hệ trên dữ liệu synthetic, không chứng minh tác động nhân quả; thời điểm có sẵn của Anxiety/Dependency và các biến khác cần được xác minh.
 
+## Polynomial Linear Regression — trạng thái hiện tại
+
+Notebook: `notebooks/sources/polynomial_linear_regression/polynomial_linear_regression.ipynb` (và bản liên kết `notebooks/polynomial_linear_regression.ipynb`); mã nguồn pipeline đóng gói nằm trong `src/lab01_ml/models/factory.py` (`create_polynomial_pipeline`). Mô hình khảo sát bậc đa thức từ $d=1$ đến $d=6$ trên 4 biến số liên tục trọng tâm kết hợp OLS, Ridge và Lasso. Các file dữ liệu trong `data/` được kiểm tra toàn vẹn mã băm SHA-256 với `data/metadata.json` và `data/assignments.csv`.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe scripts/build_polynomial_notebook.py
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py'
+.\.venv\Scripts\python.exe scripts/execute_polynomial_notebook.py
+```
+
+Lệnh cuối chạy notebook trong kernel sạch bằng `nbclient`. Đầu ra và notebook đã chạy nằm trong `outputs/polynomial/`. Khi chưa có xác nhận split chung, notebook chỉ thực hiện phân tích trên `train` và đối chiếu trên `validation`, ghi rõ `[TEST STATUS] Tap Test duoc giu kin (HELD OUT / LOCKED)`. Khi đặt biến môi trường `$env:LAB_GROUP_SPLIT_APPROVED = 'yes'`, mô hình tối ưu đã khóa (Polynomial Ridge Degree 4, $\alpha=50.0$) sẽ được đánh giá duy nhất trên tập test và lưu vào `outputs/polynomial/metrics.json`.
+
+Model joblib được lưu tại `outputs/polynomial/models/selected_polynomial_pipeline.joblib`, nhận đầu vào là đúng 12 raw features thuộc nhóm A–D. Toàn bộ các biến nguy cơ rò rỉ (`Student_ID`, `Skill_Retention_Score`, `Burnout_Risk_Level`, `GPA_Change`) bị loại trừ nghiêm ngặt.
+
 Notebook chính: [notebooks/kaggle/01_eda.ipynb](notebooks/kaggle/01_eda.ipynb). Yêu cầu được triển khai theo [brief.md](brief.md).
 
 Notebook tự đọc CSV thực tế trong **`archive/`**, không sửa file gốc, không giải nén hay tải dữ liệu khi chạy. Nếu có nhiều CSV phù hợp, đặt `DATA_PATH` ở cell cấu hình đầu tiên. Target là `Post_Semester_GPA`; `GPA_Change` chỉ dùng làm outcome phân tích.

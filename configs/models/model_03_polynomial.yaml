@@ -1,1 +1,52 @@
-# C?u h?nh s? ???c b? sung khi tri?n khai.
+# Polynomial Linear Regression Configuration
+seed: 42
+n_splits: 5
+degrees: [1, 2, 3, 4, 5, 6]
+
+hyperparameters:
+  alphas_ridge: [0.001, 0.01, 0.1, 1.0, 10.0, 50.0, 100.0]
+  alphas_lasso: [0.0001, 0.0005, 0.001, 0.005, 0.01]
+  selected_optimal_degree: 4
+  selected_optimal_model: "Ridge"
+  selected_optimal_alpha: 50.0
+
+feature_schema:
+  raw_inputs_count: 12
+  numerical_polynomial_cols:
+    - Pre_Semester_GPA
+    - Traditional_Study_Hours
+    - Weekly_GenAI_Hours
+    - Tool_Diversity
+  categorical_cols_abc:
+    - Year_of_Study
+    - Major_Category
+    - Primary_Use_Case
+    - Prompt_Engineering_Skill
+    - Institutional_Policy
+  categorical_cols_d:
+    - Perceived_AI_Dependency
+    - Anxiety_Level_During_Exams
+  binary_cols:
+    - Paid_Subscription
+  target_col: Post_Semester_GPA
+  strict_excluded_cols:
+    - Student_ID
+    - Skill_Retention_Score
+    - Burnout_Risk_Level
+    - GPA_Change
+
+scenarios:
+  - version_1_prospective: "A + B + C (10 raw features, excluding Group D)"
+  - version_2_what_if: "A + B + C + D (12 raw features, full schema)"
+
+paths:
+  data_dir: "data"
+  assignments: "data/assignments.csv"
+  metadata: "data/metadata.json"
+  train_split: "data/train/dataset.csv"
+  val_split: "data/validation/dataset.csv"
+  test_split: "data/test/dataset.csv"
+  output_dir: "outputs/polynomial"
+  models_dir: "outputs/polynomial/models"
+  tables_dir: "outputs/polynomial/tables"
+  figures_dir: "outputs/polynomial/figures"
