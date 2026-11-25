@@ -46,6 +46,12 @@ Lệnh cuối chạy notebook trong kernel sạch bằng `nbclient`. Đầu ra v
 
 Model joblib được lưu tại `outputs/polynomial/models/selected_polynomial_pipeline.joblib`, nhận đầu vào là đúng 12 raw features thuộc nhóm A–D. Toàn bộ các biến nguy cơ rò rỉ (`Student_ID`, `Skill_Retention_Score`, `Burnout_Risk_Level`, `GPA_Change`) bị loại trừ nghiêm ngặt.
 
+## Ridge Regression - trạng thái hiện tại
+
+Notebook: `notebooks/sources/rigde_regression/ridge_regression.ipynb`; cột, tiền xử lý và pipeline dùng chung nằm trong `src/lab01_ml/models/ridge.py`. Notebook tự tìm repo root (`pyproject.toml` + `data/train/dataset.csv`), đọc split có sẵn trong `data/` và kiểm tra SHA-256 với `data/metadata.json`. Chạy bằng **Restart Kernel → Run All**.
+
+α được chọn trên `validation` theo quy tắc 1-SE (α ≈ 518), sau đó refit trên train + validation. Đầu ra nằm trong `outputs/ridge/`: `figures/`, `tables/`, `metrics.json` và model `models/ridge_pipeline.joblib` (11 raw features, clip dự đoán ở 4.0). Muốn `joblib.load` model cần import được `lab01_ml.models.ridge` (thêm `src/` vào `sys.path`).
+
 Notebook chính: [notebooks/kaggle/01_eda.ipynb](notebooks/kaggle/01_eda.ipynb). Yêu cầu được triển khai theo [brief.md](brief.md).
 
 Notebook tự đọc CSV thực tế trong **`archive/`**, không sửa file gốc, không giải nén hay tải dữ liệu khi chạy. Nếu có nhiều CSV phù hợp, đặt `DATA_PATH` ở cell cấu hình đầu tiên. Target là `Post_Semester_GPA`; `GPA_Change` chỉ dùng làm outcome phân tích.
