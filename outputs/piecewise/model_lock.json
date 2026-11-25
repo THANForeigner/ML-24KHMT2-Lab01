@@ -3,9 +3,9 @@
   "predictor_terms": 52,
   "fit_scope": "train",
   "selected_by": "user",
-  "model_path": "outputs/piecewise/runs/20261124_054836_f71a96d9/s6_train_only.joblib",
+  "model_path": "outputs/piecewise/models/s6_train_only.joblib",
   "model_sha256": "da7cf9d77a8943af283ba3e679542b2f19a132b2c9bf43dc3e46c82e562d2b67",
-  "metrics_path": "outputs/piecewise/runs/20261124_054836_f71a96d9/s6_metrics.json",
+  "metrics_path": "outputs/piecewise/metrics.json",
   "selected_at_utc": "2026-11-24T06:09:35.585099+00:00",
   "test_sha256": "17ac893e4fd04acd61680fdfd4645cbc47038da543315b9eb4f11a64d4b6e30b",
   "locked_at_utc": "2026-11-24T06:22:43.494836+00:00"

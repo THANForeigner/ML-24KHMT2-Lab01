@@ -1,7 +1,7 @@
 # Piecewise outputs
 
-- `final_model.json`: lựa chọn S6 và SHA-256 của model.
-- `runs/`: model S6, metrics, bảng so sánh và biểu đồ dùng trong báo cáo.
-- `s6_test/`: model lock và metrics đánh giá S6 trên test.
-
-Notebook tạo thư mục run mới khi chạy và giữ nguyên model đã chọn.
+- `figures/`: các biểu đồ dùng trong báo cáo (bao gồm thư mục con `numeric_vs_gpa/`).
+- `models/`: model S6 train-only (`s6_train_only.joblib`).
+- `tables/`: các bảng so sánh, tìm kiếm knot, hệ số và phân tích lỗi validation.
+- `metrics.json`: metrics CV, validation và đánh giá S6 trên tập test.
+- `model_lock.json`: khóa lựa chọn S6, đường dẫn artifact và SHA-256 của model/test split.
