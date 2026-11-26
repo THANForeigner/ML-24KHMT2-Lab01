@@ -23,7 +23,10 @@ transformer được notebook lưu dưới `__main__`; trường năm học và 
 map về mức số như lúc notebook huấn luyện, không fit lại.
 Simple M03 được fit trên train + validation, nên web chỉ dùng nó để thử
 profile và so sánh trên một hồ sơ, **không** chấm lại trên validation.
-Ridge giữ nguyên bản clipping theo lựa chọn hiện tại.
+Ridge dùng estimator đã fit bên trong pipeline lưu sẵn để dự đoán **không clipping**;
+artifact không bị chỉnh sửa hay fit lại. Do đó RMSE validation trên web là của
+bản no-clip (xấp xỉ 0.16076), khác RMSE của bản clip trong `outputs/ridge/metrics.json`
+(xấp xỉ 0.15885). Dự đoán ngoài miền GPA 0–4 được giữ nguyên, không tự điều chỉnh.
 
 Các model được đọc từ artifact của bản `main` tại `b472b8d`; không cần chạy lại notebook.
 Nếu một file bị thiếu, khôi phục

@@ -1,5 +1,6 @@
 from pathlib import Path
 from math import isfinite
+import json
 
 import pytest
 from streamlit.testing.v1 import AppTest
@@ -21,6 +22,38 @@ def test_six_models_predict_and_validate_with_original_artifacts():
         validation("Simple")
     assert isfinite(predict("Piecewise", sample)[0])
     assert validation("Piecewise")[0]["RMSE"] == pytest.approx(.14671197266237843, abs=1e-8)
+
+
+def test_ridge_uses_fitted_estimator_without_upper_clip():
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "app"))
+    from services.predictor import dataset, model, predict, validation
+
+    row = dataset("validation").iloc[:1]
+    ridge = model("Ridge")
+    expected_raw = ridge.named_steps["model"].estimator_.predict(
+        ridge.named_steps["prep"].transform(row)
+    )[0]
+    assert expected_raw > 4
+    assert ridge.predict(row)[0] == pytest.approx(expected_raw)
+    assert predict("Ridge", row)[0] == pytest.approx(expected_raw)
+    assert validation("Ridge")[0]["RMSE"] == pytest.approx(.16076058372183918, abs=1e-8)
+
+
+def test_out_of_range_prediction_is_shown_and_explained(caplog):
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
+                            default_timeout=45).run()
+    app.radio[0].set_value("Thử dự đoán").run()
+    app.selectbox(key="model").select("Ridge").run()
+    app.session_state["sample_index"] = 41
+    app.button[0].click().run()
+    assert float(app.metric[0].value) > 4
+    assert any("không cắt" in warning.value.lower() for warning in app.warning)
+    assert not any("created with a default value" in record.message for record in caplog.records)
+    app.radio[0].set_value("So sánh").run()
+    scores = app.dataframe[0].value
+    chart = json.loads(app.get("vega_lite_chart")[0].proto.spec)
+    assert chart["encoding"]["x"]["scale"]["domain"][1] >= scores["GPA"].max()
 
 
 def test_categorical_labels_are_vietnamese_but_profile_keeps_original_values():
@@ -125,5 +158,5 @@ def test_demo_predicts_and_compares_same_profile():
     scores = app.dataframe[0].value.set_index("Thuật toán")
     assert scores.loc["Elastic Net", "GPA"] == pytest.approx(float(changed), abs=.0005)
     metrics = app.dataframe[1].value.set_index("Thuật toán")
-    assert metrics.loc["Ridge", "RMSE"] == pytest.approx(.158855, abs=.00001)
+    assert metrics.loc["Ridge", "RMSE"] == pytest.approx(.160761, abs=.00001)
     assert metrics.loc["Elastic Net", "RMSE"] == pytest.approx(.150078, abs=.00001)

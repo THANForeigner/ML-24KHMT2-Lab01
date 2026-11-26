@@ -104,12 +104,14 @@ def render(train, available):
                 values, widget = train[field], columns[i % 2]
                 key = "field_" + field
                 if field in ("Weekly_GenAI_Hours", "Traditional_Study_Hours", "Pre_Semester_GPA"):
+                    initial = {} if key in st.session_state else {"value": float(profile[field])}
                     profile[field] = widget.number_input(LABEL[field], float(values.min()), float(values.max()),
-                                                         float(profile[field]), step=.001, format="%.3f", key=key)
+                                                         step=.001, format="%.3f", key=key, **initial)
                 else:
                     options = sorted(values.dropna().unique().tolist())
+                    initial = {} if key in st.session_state else {"index": options.index(profile[field])}
                     profile[field] = widget.selectbox(
-                        LABEL[field], options, index=options.index(profile[field]),
+                        LABEL[field], options, **initial,
                         format_func=lambda value, column=field: option_label(column, value), key=key
                     )
     st.session_state.profile = profile
@@ -117,7 +119,10 @@ def render(train, available):
     st.write("")
     eyebrow("Phản hồi / theo thời gian thực")
     st.subheader("Kết quả dự đoán")
-    st.metric(f"GPA dự đoán · {name}", f"{predict(name, frame)[0]:.3f}", border=True)
+    prediction = float(predict(name, frame)[0])
+    st.metric(f"GPA dự đoán · {name}", f"{prediction:.3f}", border=True)
+    if not 0 <= prediction <= 4:
+        st.warning("Dự đoán nằm ngoài miền GPA 0–4. Web giữ nguyên giá trị, không cắt (no clipping).")
     st.caption("Giá trị ước lượng từ mô hình, không phải GPA thực tế của sinh viên.")
     with st.container(border=True):
         st.markdown('<span class="card-index">WHAT IF / ĐƯỜNG DỰ ĐOÁN</span>', unsafe_allow_html=True)

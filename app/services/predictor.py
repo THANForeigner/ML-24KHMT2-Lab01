@@ -24,7 +24,7 @@ MODELS = {
     "Polynomial": ("polynomial/models/selected_polynomial_pipeline.joblib", INPUTS,
                    "Dùng đặc trưng đa thức để biểu diễn quan hệ cong giữa đầu vào và GPA."),
     "Ridge": ("ridge/models/ridge_pipeline.joblib", NUM + BIN + CAT,
-              "Thu nhỏ hệ số hồi quy bằng phạt L2. Pipeline này không dùng mức lo âu khi thi."),
+               "Thu nhỏ hệ số bằng phạt L2. Dùng estimator đã fit, không cắt dự đoán ở GPA 4; không dùng mức lo âu khi thi."),
     "Elastic Net": ("elastic_net/models/selected_elastic_net_pipeline.joblib", INPUTS,
                     "Điều chỉnh mức phạt L1/L2 để thu nhỏ hệ số và chọn đặc trưng."),
 }
@@ -51,6 +51,10 @@ def model(name):
                 or pipeline["prediction_policy"] != "raw_ols"):
             raise ValueError("Simple: cần đúng model M03 no clipping.")
     else:
+        if name == "Ridge":
+            # This changes only the in-memory wrapper; fitted preprocessing and
+            # Ridge coefficients stay untouched, and the joblib remains intact.
+            pipeline.named_steps["model"].upper = None
         predict_with_model(name, pipeline, dataset("train").iloc[:1])
     return pipeline
 

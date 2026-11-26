@@ -17,8 +17,9 @@ def render(available):
         st.caption("Dùng hồ sơ hiện tại từ trang Thử dự đoán, hoặc dòng mẫu đầu tiên nếu bạn chưa nhập.")
         frame = pd.DataFrame([st.session_state.profile])
         scores = pd.DataFrame([{"Thuật toán": name, "GPA": predict(name, frame)[0]} for name in available])
+        domain = [min(0, float(scores["GPA"].min())), max(4, float(scores["GPA"].max()))]
         bars = (alt.Chart(scores).mark_bar(color="#11665e", cornerRadiusEnd=5).encode(
-            x=alt.X("GPA:Q", title="GPA dự đoán", scale=alt.Scale(domain=[0, 4])),
+            x=alt.X("GPA:Q", title="GPA dự đoán", scale=alt.Scale(domain=domain)),
             y=alt.Y("Thuật toán:N", sort=list(available), title=None),
             tooltip=["Thuật toán:N", alt.Tooltip("GPA:Q", format=".3f")]))
         st.altair_chart(bars, width="stretch")
