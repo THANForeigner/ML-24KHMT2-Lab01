@@ -67,6 +67,27 @@ class ElasticNetDiagnosticsTests(unittest.TestCase):
         self.assertEqual(bounds_info['above_four_count'], 2)
         self.assertAlmostEqual(bounds_info['out_of_bounds_pct'], 50.0)
 
+    def test_what_if_curves_use_valid_categories_without_warnings(self):
+        import warnings
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        from lab01_ml.visualization.plots import plot_what_if_curves
+
+        profile = self.train[INPUTS].iloc[0].to_dict()
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter('always')
+            fig, axes = plot_what_if_curves(self.pipe, profile, ai_hours_grid=np.linspace(0, 40, 10))
+            plt.close(fig)
+
+        unknown_warnings = [w for w in captured if 'unknown categories' in str(w.message).lower()]
+        self.assertEqual(len(unknown_warnings), 0, f'Unexpected unknown category warnings: {unknown_warnings}')
+        self.assertEqual(len(axes), 3)
+
+        # Invalid category should raise ValueError explicitly
+        with self.assertRaises(ValueError):
+            plot_what_if_curves(self.pipe, profile, use_cases=['Invalid_Use_Case'])
+
 
 if __name__ == '__main__':
     unittest.main()

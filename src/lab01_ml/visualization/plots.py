@@ -211,30 +211,91 @@ def plot_residuals(y_true, y_pred, save_path=None):
     return fig, (ax1, ax2)
 
 
-def plot_what_if_curves(pipeline, profile, ai_hours_grid=None, save_path=None):
-    """Plot what-if curves varying Weekly_GenAI_Hours across different Use Cases and Prompt Skills."""
+def plot_what_if_curves(
+    pipeline,
+    profile,
+    ai_hours_grid=None,
+    use_cases=None,
+    prompt_skills=None,
+    save_path=None,
+):
+    """Plot what-if curves varying Weekly_GenAI_Hours across valid Use Cases and Prompt Skills."""
     if ai_hours_grid is None:
         ai_hours_grid = np.linspace(0, 40, 50)
 
-    use_cases = ['Summarization', 'Coding Assistance', 'Exam Preparation']
-    prompt_skills = ['Low', 'High']
+    transformer = pipeline.named_steps.get('features') if hasattr(pipeline, 'named_steps') else None
+    valid_use_cases = []
+    valid_prompt_skills = []
+    if transformer is not None and hasattr(transformer, 'encoder_') and hasattr(transformer, 'cat_columns_'):
+        cat_map = {
+            col: [str(v) for v in cats]
+            for col, cats in zip(transformer.cat_columns_, transformer.encoder_.categories_)
+        }
+        valid_use_cases = cat_map.get('Primary_Use_Case', [])
+        valid_prompt_skills = cat_map.get('Prompt_Engineering_Skill', [])
 
-    fig, ax = plt.subplots(figsize=(9, 5))
+    if use_cases is None:
+        use_cases = valid_use_cases or [
+            'Copywriting/Drafting',
+            'Debugging/Troubleshooting',
+            'Direct_Answer_Generation',
+            'Ideation',
+            'Summarizing_Reading',
+        ]
+    elif valid_use_cases:
+        unknown_u = [u for u in use_cases if str(u) not in valid_use_cases]
+        if unknown_u:
+            raise ValueError(f'Unknown Primary_Use_Case values: {unknown_u}. Valid: {valid_use_cases}')
 
-    for u in use_cases:
-        for k in prompt_skills:
+    if prompt_skills is None:
+        preferred_order = ['Beginner', 'Intermediate', 'Advanced']
+        if valid_prompt_skills:
+            ordered = [s for s in preferred_order if s in valid_prompt_skills]
+            extras = [s for s in valid_prompt_skills if s not in ordered]
+            prompt_skills = ordered + extras
+        else:
+            prompt_skills = preferred_order
+    elif valid_prompt_skills:
+        unknown_k = [k for k in prompt_skills if str(k) not in valid_prompt_skills]
+        if unknown_k:
+            raise ValueError(f'Unknown Prompt_Engineering_Skill values: {unknown_k}. Valid: {valid_prompt_skills}')
+
+    n_skills = len(prompt_skills)
+    fig, axes = plt.subplots(1, n_skills, figsize=(5 * n_skills, 4.5), sharey=True)
+    if n_skills == 1:
+        axes = [axes]
+
+    for idx, (ax, k) in enumerate(zip(axes, prompt_skills)):
+        for u in use_cases:
             test_rows = [
                 profile | {H: float(h), 'Primary_Use_Case': u, 'Prompt_Engineering_Skill': k}
                 for h in ai_hours_grid
             ]
             preds = pipeline.predict(pd.DataFrame(test_rows))
-            ax.plot(ai_hours_grid, preds, label=f'{u} | Skill: {k}')
+            ax.plot(ai_hours_grid, preds, linewidth=2, label=u)
 
-    ax.set_title('Phân tích Kịch bản What-if: Đáp ứng GPA dự đoán theo Giờ AI (Profile cố định)', fontsize=12)
-    ax.set_xlabel('Số giờ dùng AI mỗi tuần (Weekly_GenAI_Hours)', fontsize=10)
-    ax.set_ylabel('Điểm GPA dự đoán (Predicted GPA)', fontsize=10)
-    ax.legend(fontsize=8, loc='best')
+        ax.set_title(f'Prompt Skill: {k}', fontsize=11)
+        ax.set_xlabel('Số giờ dùng AI / tuần', fontsize=10)
+        if idx == 0:
+            ax.set_ylabel('Điểm GPA dự đoán (Predicted GPA)', fontsize=10)
+        ax.grid(True, linestyle='--', alpha=0.35)
+
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc='lower center',
+        ncol=min(len(use_cases), 3),
+        fontsize=9,
+        frameon=True,
+        bbox_to_anchor=(0.5, -0.04),
+    )
+    fig.suptitle(
+        'Phân tích Kịch bản What-if: Đáp ứng GPA dự đoán theo Giờ AI (Profile cố định)',
+        fontsize=12,
+        y=1.02,
+    )
+    fig.tight_layout(rect=[0, 0.08, 1, 0.98])
     if save_path:
-        fig.tight_layout()
         fig.savefig(save_path, dpi=300, bbox_inches='tight')
-    return fig, ax
+    return fig, axes
