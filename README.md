@@ -1,5 +1,46 @@
 # Lab 01 — AI Impact on Students EDA
 
+## Web showcase GPA (Streamlit)
+
+Từ thư mục gốc, dùng Python 3.13 (môi trường đã kiểm thử):
+
+```bash
+python3.13 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-showcase.txt
+python -m streamlit run app/app.py
+```
+
+Mở `http://localhost:8501`. Chọn **Thử dự đoán**, chọn thuật toán, sửa một đầu vào
+hoặc bấm **Điền dữ liệu mẫu**. GPA và đường dự đoán cập nhật ngay. Chuyển sang
+**So sánh** để dùng lại hồ sơ vừa nhập và xem MAE, RMSE, R² trên cùng tập validation.
+
+Ứng dụng dùng sáu model đã lưu trong `outputs/`:
+Simple (M01–M05 `raw_ols`, không clipping), Interaction, Piecewise (S6),
+Polynomial, Ridge và Elastic Net. Dropdown hiển thị tiếng Việt nhưng chuyển
+giá trị gốc cho pipeline. Piecewise S6 dùng adapter inference để tải các
+transformer được notebook lưu dưới `__main__`; trường năm học và quy định được
+map về mức số như lúc notebook huấn luyện, không fit lại.
+Simple cho chọn biến đầu vào: M01 dùng giờ AI, M02 dùng giờ tự học, M03 dùng GPA
+trước học kỳ (mặc định), M04 dùng số công cụ và M05 dùng mức phụ thuộc AI.
+Mỗi biến thể là một hồi quy đơn chỉ dùng **một biến**. Các artifact Simple đã fit
+trên train + validation, nên web chỉ dùng chúng để thử profile và so sánh trên
+một hồ sơ, **không** chấm lại trên validation.
+Ridge dùng estimator đã fit bên trong pipeline lưu sẵn để dự đoán **không clipping**;
+artifact không bị chỉnh sửa hay fit lại. Do đó RMSE validation trên web là của
+bản no-clip (xấp xỉ 0.16076), khác RMSE của bản clip trong `outputs/ridge/metrics.json`
+(xấp xỉ 0.15885). Dự đoán ngoài miền GPA 0–4 được giữ nguyên, không tự điều chỉnh.
+
+Các model được đọc từ artifact của bản `main` tại `b472b8d`; không cần chạy lại notebook.
+Nếu một file bị thiếu, khôi phục
+file tương ứng từ bản clone. Các cột đầu vào lấy từ train; SHA-256 của train và
+validation được kiểm tra theo `data/metadata.json`. Web không dùng dữ liệu test.
+Riêng Ridge của snapshot này có `refit_on_trval=false`, `n_fit=35000` trong
+`outputs/ridge/metrics.json`. Artifact Ridge dùng sklearn 1.7.2 nên sklearn 1.9.1
+báo cảnh báo khi tải; test showcase đối chiếu GPA mẫu và RMSE validation đã lưu.
+
+Kiểm thử luồng giao diện: `python -m pytest -q tests/test_showcase.py`.
+
 ## Elastic Net Regression — trạng thái hiện tại
 
 Notebook: `notebooks/elastic_net_regression.ipynb`; mã nguồn chính nằm trong `src/lab01_ml/features/elastic_net_features.py` và `src/lab01_ml/models/`. Các file chia sẵn trong `data/splits/` được kiểm tra với `data/assignments.csv` và `data/metadata.json`; không tự tạo hoặc ghi đè split.

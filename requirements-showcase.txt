@@ -1,0 +1,5 @@
+-r requirements.txt
+scikit-learn==1.9.1
+streamlit>=1.55,<2
+altair>=5,<7
+-e .
