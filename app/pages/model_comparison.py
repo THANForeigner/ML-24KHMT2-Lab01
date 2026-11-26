@@ -13,7 +13,7 @@ def render(available):
     st.write("So sánh kết quả của cùng một hồ sơ, sau đó kiểm tra sai số trên tập validation.")
     with st.container(border=True):
         st.markdown('<span class="card-index">01 / CÙNG ĐẦU VÀO</span>', unsafe_allow_html=True)
-        st.subheader("Cùng một hồ sơ, bốn góc nhìn")
+        st.subheader(f"Cùng một hồ sơ, {len(available)} góc nhìn")
         st.caption("Dùng hồ sơ hiện tại từ trang Thử dự đoán, hoặc dòng mẫu đầu tiên nếu bạn chưa nhập.")
         frame = pd.DataFrame([st.session_state.profile])
         scores = pd.DataFrame([{"Thuật toán": name, "GPA": predict(name, frame)[0]} for name in available])
@@ -26,7 +26,8 @@ def render(available):
     st.write("")
     eyebrow("Đánh giá / 7.500 dòng")
     st.subheader("Hiệu năng trên tập validation")
-    st.caption("Bốn mô hình dự đoán trên cùng những dòng dữ liệu. Tập test không tham gia so sánh.")
+    st.caption("Mô hình chỉ được đánh giá trên validation khi artifact không fit trên chính tập đó. "
+               "Tập test không tham gia so sánh.")
     metrics, points = [], {}
     for name in available:
         try:

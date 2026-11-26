@@ -25,6 +25,7 @@ def showcase():
             available.append(name)
         except Exception as exc:
             st.sidebar.warning(f"{name} chưa sẵn sàng: {exc}")
+    st.sidebar.caption(f"{len(available)} mô hình sẵn sàng")
     if section == "Tổng quan":
         st.markdown(
             '<div class="hero">'
@@ -39,7 +40,8 @@ def showcase():
             '<span>01 / 03</span></div></div></div>', unsafe_allow_html=True
         )
         st.markdown('<div class="stats-strip">'
-                    f'<div><strong>{len(available):02d}<span> / 04</span></strong><small>MÔ HÌNH SẴN SÀNG</small></div>'
+                    f'<div><strong>{len(available):02d}<span> / {len(MODELS):02d}</span></strong>'
+                    '<small>MÔ HÌNH SẴN SÀNG</small></div>'
                     '<div><strong>12</strong><small>ĐẶC TRƯNG ĐẦU VÀO</small></div>'
                     '<div><strong>7.500</strong><small>DÒNG VALIDATION</small></div>'
                     '</div>', unsafe_allow_html=True)
@@ -66,7 +68,7 @@ def showcase():
         st.write("")
         eyebrow("Bộ sưu tập / 02")
         st.subheader("Chọn mô hình để khám phá")
-        st.write("Bốn cách tiếp cận một câu hỏi: GPA sau học kỳ sẽ được ước lượng như thế nào?")
+        st.write("Nhiều cách tiếp cận một câu hỏi: GPA sau học kỳ sẽ được ước lượng như thế nào?")
         grid = st.columns(2, gap="medium")
         for i, (name, (_, fields, text)) in enumerate(MODELS.items()):
             with grid[i % 2]:

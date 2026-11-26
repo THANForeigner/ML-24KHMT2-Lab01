@@ -10,11 +10,17 @@ from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_err
 
 from lab01_ml.features.engineering import INPUTS
 from lab01_ml.models.ridge import NUM, BIN, CAT, TARGET
+from services.piecewise_compat import load_piecewise
 
 ROOT = Path(__file__).resolve().parents[2]
 MODELS = {
+    "Simple": ("simple/runs/20261125_105509_d606e49/models/M03_raw_ols.joblib",
+               ["Pre_Semester_GPA"],
+               "Hồi quy tuyến tính đơn theo GPA trước học kỳ; dùng bản M03 không giới hạn (no clipping)."),
     "Interaction": ("interaction/models/selected.joblib", INPUTS,
                     "Biểu diễn tương tác giữa thời lượng dùng AI, mục đích sử dụng và kỹ năng viết prompt."),
+    "Piecewise": ("piecewise/models/s6_train_only.joblib", INPUTS,
+                  "Hồi quy tuyến tính từng đoạn S6 với các điểm gãy học từ train; không cắt dự đoán."),
     "Polynomial": ("polynomial/models/selected_polynomial_pipeline.joblib", INPUTS,
                    "Dùng đặc trưng đa thức để biểu diễn quan hệ cong giữa đầu vào và GPA."),
     "Ridge": ("ridge/models/ridge_pipeline.joblib", NUM + BIN + CAT,
@@ -38,17 +44,41 @@ def dataset(split):
 
 @st.cache_resource
 def model(name):
-    pipeline = joblib.load(ROOT / "outputs" / MODELS[name][0])
-    pipeline.predict(dataset("train").iloc[:1][MODELS[name][1]])
+    path = ROOT / "outputs" / MODELS[name][0]
+    pipeline = load_piecewise(path) if name == "Piecewise" else joblib.load(path)
+    if name == "Simple":
+        if (pipeline["model_id"] != "M03" or pipeline["clipping"]
+                or pipeline["prediction_policy"] != "raw_ols"):
+            raise ValueError("Simple: cần đúng model M03 no clipping.")
+    else:
+        predict_with_model(name, pipeline, dataset("train").iloc[:1])
     return pipeline
 
 
+def predict_with_model(name, pipeline, frame):
+    if name == "Simple":
+        return pipeline["estimator"].predict(frame[[pipeline["feature"]]])
+    raw = frame.loc[:, MODELS[name][1]]
+    if name == "Piecewise":
+        config = json.loads((ROOT / "outputs/piecewise/metrics.json").read_text())
+        raw = raw.copy()
+        for field, levels in [("Year_of_Study", config["year_levels"]),
+                              ("Institutional_Policy", config["policy_levels"])]:
+            converted = raw[field].map(levels)
+            if converted.isna().any():
+                raise ValueError(f"Piecewise: giá trị {field} không hợp lệ.")
+            raw[field] = converted
+    return pipeline.predict(raw)
+
+
 def predict(name, frame):
-    return model(name).predict(frame.loc[:, MODELS[name][1]])
+    return predict_with_model(name, model(name), frame)
 
 
 @st.cache_data
 def validation(name):
+    if name == "Simple":
+        raise ValueError("Artifact Simple đã fit trên train + validation; không chấm lại trên validation.")
     rows = dataset("validation")
     if name == "Ridge":
         run = json.loads((ROOT / "outputs/ridge/metrics.json").read_text())

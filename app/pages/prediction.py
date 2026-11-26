@@ -15,6 +15,49 @@ LABEL = {
     "Perceived_AI_Dependency": "Mức phụ thuộc AI", "Anxiety_Level_During_Exams": "Mức lo âu khi thi",
 }
 
+MODEL_LABEL = {
+    "Simple": "Hồi quy tuyến tính đơn · Simple",
+    "Interaction": "Hồi quy có tương tác · Interaction",
+    "Piecewise": "Hồi quy tuyến tính từng đoạn · Piecewise",
+    "Polynomial": "Hồi quy đa thức · Polynomial",
+    "Ridge": "Hồi quy Ridge · Ridge",
+    "Elastic Net": "Hồi quy Elastic Net · Elastic Net",
+}
+OPTIONS_VI = {
+    "Year_of_Study": {
+        "Freshman": "Năm nhất", "Sophomore": "Năm hai", "Junior": "Năm ba",
+        "Senior": "Năm tư", "Graduate": "Sau đại học",
+    },
+    "Major_Category": {
+        "Arts": "Nghệ thuật", "Business": "Kinh doanh", "Humanities": "Khoa học nhân văn",
+        "Medical": "Y khoa", "STEM": "Khoa học, công nghệ, kỹ thuật & toán",
+    },
+    "Primary_Use_Case": {
+        "Copywriting/Drafting": "Soạn thảo nội dung",
+        "Debugging/Troubleshooting": "Gỡ lỗi và khắc phục sự cố",
+        "Direct_Answer_Generation": "Tạo câu trả lời trực tiếp",
+        "Ideation": "Lên ý tưởng", "Summarizing_Reading": "Tóm tắt tài liệu",
+    },
+    "Prompt_Engineering_Skill": {
+        "Beginner": "Mới bắt đầu", "Intermediate": "Trung cấp", "Advanced": "Nâng cao",
+    },
+    "Institutional_Policy": {
+        "Strict_Ban": "Cấm sử dụng", "Allowed_With_Citation": "Cho phép nếu trích dẫn",
+        "Actively_Encouraged": "Khuyến khích sử dụng",
+    },
+    "Paid_Subscription": {False: "Không đăng ký", True: "Có đăng ký"},
+}
+
+
+def option_label(field, value):
+    if field in OPTIONS_VI:
+        return OPTIONS_VI[field][value]
+    if field in ("Perceived_AI_Dependency", "Anxiety_Level_During_Exams"):
+        return f"Mức {value}/10"
+    if field == "Tool_Diversity":
+        return f"{value} công cụ"
+    return str(value)
+
 
 def load_sample(train, state):
     """Synchronize both the prediction profile and Streamlit's widget values."""
@@ -33,7 +76,7 @@ def render(train, available):
     st.write("Tạo hồ sơ sinh viên và quan sát cách mô hình ước lượng GPA sau học kỳ.")
     head, sample = st.columns([2, 1], vertical_alignment="bottom", gap="medium")
     with head:
-        name = st.selectbox("Mô hình dự đoán", available, key="model")
+        name = st.selectbox("Mô hình dự đoán", available, format_func=MODEL_LABEL.get, key="model")
     _, fields, description = MODELS[name]
     with sample:
         st.button("Điền dữ liệu mẫu", use_container_width=True, on_click=load_sample,
@@ -65,7 +108,10 @@ def render(train, available):
                                                          float(profile[field]), step=.001, format="%.3f", key=key)
                 else:
                     options = sorted(values.dropna().unique().tolist())
-                    profile[field] = widget.selectbox(LABEL[field], options, index=options.index(profile[field]), key=key)
+                    profile[field] = widget.selectbox(
+                        LABEL[field], options, index=options.index(profile[field]),
+                        format_func=lambda value, column=field: option_label(column, value), key=key
+                    )
     st.session_state.profile = profile
     frame = pd.DataFrame([profile])
     st.write("")
@@ -77,7 +123,8 @@ def render(train, available):
         st.markdown('<span class="card-index">WHAT IF / ĐƯỜNG DỰ ĐOÁN</span>', unsafe_allow_html=True)
         st.subheader("Điều gì xảy ra khi thay đổi một biến?")
         st.write("Các trường khác giữ nguyên theo hồ sơ đang hiển thị ở trên.")
-        field = st.selectbox("Biến khảo sát", ["Weekly_GenAI_Hours", "Pre_Semester_GPA", "Traditional_Study_Hours"],
+        candidates = ["Weekly_GenAI_Hours", "Pre_Semester_GPA", "Traditional_Study_Hours"]
+        field = st.selectbox("Biến khảo sát", [column for column in candidates if column in fields],
                              format_func=LABEL.get)
         grid = np.unique(np.r_[np.linspace(train[field].min(), train[field].max(), 61), profile[field]])
         rows = pd.DataFrame([profile] * len(grid)).assign(**{field: grid})

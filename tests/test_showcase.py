@@ -1,7 +1,48 @@
 from pathlib import Path
+from math import isfinite
 
 import pytest
 from streamlit.testing.v1 import AppTest
+
+
+def test_six_models_predict_and_validate_with_original_artifacts():
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "app"))
+    from services.predictor import MODELS, dataset, model, predict, validation
+
+    assert {"Simple", "Piecewise"}.issubset(MODELS)
+    sample = dataset("train").iloc[:1]
+    simple = model("Simple")
+    assert simple["clipping"] is False
+    assert simple["model_id"] == "M03"
+    assert predict("Simple", sample)[0] == pytest.approx(
+        simple["estimator"].predict(sample[[simple["feature"]]])[0])
+    with pytest.raises(ValueError, match="train.*validation"):
+        validation("Simple")
+    assert isfinite(predict("Piecewise", sample)[0])
+    assert validation("Piecewise")[0]["RMSE"] == pytest.approx(.14671197266237843, abs=1e-8)
+
+
+def test_categorical_labels_are_vietnamese_but_profile_keeps_original_values():
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
+                            default_timeout=45).run()
+    app.radio[0].set_value("Thử dự đoán").run()
+    app.selectbox(key="model").select("Interaction").run()
+    year = app.selectbox(key="field_Year_of_Study")
+    assert "Năm nhất" in year.options
+    assert app.selectbox(key="field_Primary_Use_Case").options[0] != "Copywriting/Drafting"
+    assert app.selectbox(key="model").options[0].startswith("Hồi quy")
+    assert app.session_state["profile"]["Year_of_Study"] in {
+        "Freshman", "Sophomore", "Junior", "Senior", "Graduate"
+    }
+
+
+def test_simple_what_if_only_offers_model_inputs():
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
+                            default_timeout=45).run()
+    app.radio[0].set_value("Thử dự đoán").run()
+    what_if = next(box for box in app.selectbox if box.label == "Biến khảo sát")
+    assert what_if.options == ["GPA trước học kỳ"]
 
 
 def test_overview_has_clear_entry_points_and_prediction_groups():
@@ -20,16 +61,19 @@ def test_overview_comparison_shortcut_shows_validation_context():
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
                             default_timeout=45).run()
     assert any("Bắt đầu" in heading.value for heading in app.subheader)
+    assert {"Simple", "Piecewise"}.issubset({heading.value for heading in app.subheader})
+    assert any("6 mô hình sẵn sàng" in item.value for item in app.caption)
     app.button(key="start_comparison").click().run()
     assert not app.exception
     assert any("Hiệu năng trên tập validation" in heading.value for heading in app.subheader)
-    assert app.dataframe[1].value.shape[0] == 4
+    assert app.dataframe[1].value.shape[0] == 5
 
 
 def test_sample_button_updates_visible_fields_and_prediction_together():
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
                             default_timeout=45).run()
     app.radio[0].set_value("Thử dự đoán").run()
+    app.selectbox(key="model").select("Interaction").run()
     app.number_input(key="field_Pre_Semester_GPA").set_value(3.5).run()
     app.number_input(key="field_Weekly_GenAI_Hours").set_value(2.0).run()
     before_gpa = app.metric[0].value

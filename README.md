@@ -15,8 +15,18 @@ Mở `http://localhost:8501`. Chọn **Thử dự đoán**, chọn thuật toán
 hoặc bấm **Điền dữ liệu mẫu**. GPA và đường dự đoán cập nhật ngay. Chuyển sang
 **So sánh** để dùng lại hồ sơ vừa nhập và xem MAE, RMSE, R² trên cùng tập validation.
 
-Ứng dụng dùng trực tiếp bốn pipeline đã lưu trong `outputs/{interaction,polynomial,ridge,elastic_net}/models/`
-của bản `main` tại `b472b8d`; không cần chạy lại notebook. Nếu một file bị thiếu, khôi phục
+Ứng dụng dùng sáu model đã lưu trong `outputs/`:
+Simple (M03 `raw_ols`, không clipping), Interaction, Piecewise (S6),
+Polynomial, Ridge và Elastic Net. Dropdown hiển thị tiếng Việt nhưng chuyển
+giá trị gốc cho pipeline. Piecewise S6 dùng adapter inference để tải các
+transformer được notebook lưu dưới `__main__`; trường năm học và quy định được
+map về mức số như lúc notebook huấn luyện, không fit lại.
+Simple M03 được fit trên train + validation, nên web chỉ dùng nó để thử
+profile và so sánh trên một hồ sơ, **không** chấm lại trên validation.
+Ridge giữ nguyên bản clipping theo lựa chọn hiện tại.
+
+Các model được đọc từ artifact của bản `main` tại `b472b8d`; không cần chạy lại notebook.
+Nếu một file bị thiếu, khôi phục
 file tương ứng từ bản clone. Các cột đầu vào lấy từ train; SHA-256 của train và
 validation được kiểm tra theo `data/metadata.json`. Web không dùng dữ liệu test.
 Riêng Ridge của snapshot này có `refit_on_trval=false`, `n_fit=35000` trong
