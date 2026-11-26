@@ -16,13 +16,16 @@ hoặc bấm **Điền dữ liệu mẫu**. GPA và đường dự đoán cập 
 **So sánh** để dùng lại hồ sơ vừa nhập và xem MAE, RMSE, R² trên cùng tập validation.
 
 Ứng dụng dùng sáu model đã lưu trong `outputs/`:
-Simple (M03 `raw_ols`, không clipping), Interaction, Piecewise (S6),
+Simple (M01–M05 `raw_ols`, không clipping), Interaction, Piecewise (S6),
 Polynomial, Ridge và Elastic Net. Dropdown hiển thị tiếng Việt nhưng chuyển
 giá trị gốc cho pipeline. Piecewise S6 dùng adapter inference để tải các
 transformer được notebook lưu dưới `__main__`; trường năm học và quy định được
 map về mức số như lúc notebook huấn luyện, không fit lại.
-Simple M03 được fit trên train + validation, nên web chỉ dùng nó để thử
-profile và so sánh trên một hồ sơ, **không** chấm lại trên validation.
+Simple cho chọn biến đầu vào: M01 dùng giờ AI, M02 dùng giờ tự học, M03 dùng GPA
+trước học kỳ (mặc định), M04 dùng số công cụ và M05 dùng mức phụ thuộc AI.
+Mỗi biến thể là một hồi quy đơn chỉ dùng **một biến**. Các artifact Simple đã fit
+trên train + validation, nên web chỉ dùng chúng để thử profile và so sánh trên
+một hồ sơ, **không** chấm lại trên validation.
 Ridge dùng estimator đã fit bên trong pipeline lưu sẵn để dự đoán **không clipping**;
 artifact không bị chỉnh sửa hay fit lại. Do đó RMSE validation trên web là của
 bản no-clip (xấp xỉ 0.16076), khác RMSE của bản clip trong `outputs/ridge/metrics.json`

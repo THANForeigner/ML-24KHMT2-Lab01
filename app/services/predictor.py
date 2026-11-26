@@ -13,10 +13,18 @@ from lab01_ml.models.ridge import NUM, BIN, CAT, TARGET
 from services.piecewise_compat import load_piecewise
 
 ROOT = Path(__file__).resolve().parents[2]
+SIMPLE_FEATURES = {
+    "M01": "Weekly_GenAI_Hours",
+    "M02": "Traditional_Study_Hours",
+    "M03": "Pre_Semester_GPA",
+    "M04": "Tool_Diversity",
+    "M05": "Perceived_AI_Dependency",
+}
+SIMPLE_RUN = "simple/runs/20261125_105509_d606e49/models"
 MODELS = {
     "Simple": ("simple/runs/20261125_105509_d606e49/models/M03_raw_ols.joblib",
                ["Pre_Semester_GPA"],
-               "Hồi quy tuyến tính đơn theo GPA trước học kỳ; dùng bản M03 không giới hạn (no clipping)."),
+               "Hồi quy tuyến tính đơn dùng một biến mỗi lần; chọn M01–M05 (no clipping)."),
     "Interaction": ("interaction/models/selected.joblib", INPUTS,
                     "Biểu diễn tương tác giữa thời lượng dùng AI, mục đích sử dụng và kỹ năng viết prompt."),
     "Piecewise": ("piecewise/models/s6_train_only.joblib", INPUTS,
@@ -43,13 +51,18 @@ def dataset(split):
 
 
 @st.cache_resource
-def model(name):
-    path = ROOT / "outputs" / MODELS[name][0]
+def model(name, variant="M03"):
+    if name == "Simple":
+        if variant not in SIMPLE_FEATURES:
+            raise ValueError("Simple: biến thể không hợp lệ.")
+        path = ROOT / "outputs" / SIMPLE_RUN / f"{variant}_raw_ols.joblib"
+    else:
+        path = ROOT / "outputs" / MODELS[name][0]
     pipeline = load_piecewise(path) if name == "Piecewise" else joblib.load(path)
     if name == "Simple":
-        if (pipeline["model_id"] != "M03" or pipeline["clipping"]
-                or pipeline["prediction_policy"] != "raw_ols"):
-            raise ValueError("Simple: cần đúng model M03 no clipping.")
+        if (pipeline["model_id"] != variant or pipeline["feature"] != SIMPLE_FEATURES[variant]
+                or pipeline["clipping"] or pipeline["prediction_policy"] != "raw_ols"):
+            raise ValueError(f"Simple: cần đúng model {variant} no clipping.")
     else:
         if name == "Ridge":
             # This changes only the in-memory wrapper; fitted preprocessing and
@@ -75,8 +88,8 @@ def predict_with_model(name, pipeline, frame):
     return pipeline.predict(raw)
 
 
-def predict(name, frame):
-    return predict_with_model(name, model(name), frame)
+def predict(name, frame, variant="M03"):
+    return predict_with_model(name, model(name, variant=variant), frame)
 
 
 @st.cache_data

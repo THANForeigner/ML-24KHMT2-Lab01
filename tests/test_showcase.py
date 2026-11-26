@@ -78,6 +78,48 @@ def test_simple_what_if_only_offers_model_inputs():
     assert what_if.options == ["GPA trước học kỳ"]
 
 
+@pytest.mark.parametrize("variant, field, label", [
+    ("M01", "Weekly_GenAI_Hours", "Giờ dùng AI mỗi tuần"),
+    ("M02", "Traditional_Study_Hours", "Giờ tự học truyền thống"),
+    ("M03", "Pre_Semester_GPA", "GPA trước học kỳ"),
+    ("M04", "Tool_Diversity", "Số công cụ"),
+    ("M05", "Perceived_AI_Dependency", "Mức phụ thuộc AI"),
+])
+def test_simple_variant_switches_visible_input_and_matches_raw_model(variant, field, label):
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "app"))
+    from services.predictor import dataset, model
+
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
+                            default_timeout=45).run()
+    app.radio[0].set_value("Thử dự đoán").run()
+    app.selectbox(key="simple_variant").select(variant).run()
+    assert not app.exception
+    assert len([item for item in app.number_input if item.key and item.key.startswith("field_")]) + len(
+        [item for item in app.selectbox if item.key and item.key.startswith("field_")]
+    ) == 1
+    assert any(item.label == label for item in [*app.number_input, *app.selectbox])
+    assert next(box for box in app.selectbox if box.label == "Biến khảo sát").options == [label]
+    bundle = model("Simple", variant=variant)
+    assert bundle["feature"] == field and bundle["clipping"] is False
+    raw = bundle["estimator"].predict(dataset("train").iloc[:1][[field]])[0]
+    assert float(app.metric[0].value) == pytest.approx(raw, abs=.0005)
+    app.radio[0].set_value("So sánh").run()
+    scores = app.dataframe[0].value.set_index("Thuật toán")
+    assert scores.loc["Simple", "GPA"] == pytest.approx(raw)
+
+
+def test_simple_choice_survives_page_navigation():
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
+                            default_timeout=45).run()
+    app.radio[0].set_value("Thử dự đoán").run()
+    app.selectbox(key="simple_variant").select("M04").run()
+    app.radio[0].set_value("So sánh").run()
+    assert any("Simple đang dùng M04" in caption.value for caption in app.caption)
+    app.radio[0].set_value("Thử dự đoán").run()
+    assert app.selectbox(key="simple_variant").value == "M04"
+
+
 def test_overview_has_clear_entry_points_and_prediction_groups():
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app/app.py"),
                             default_timeout=45).run()

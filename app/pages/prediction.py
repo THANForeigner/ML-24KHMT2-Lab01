@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 from components.charts import sensitivity
-from services.predictor import MODELS, predict
+from services.predictor import MODELS, SIMPLE_FEATURES, predict
 from theme import eyebrow
 
 LABEL = {
@@ -70,6 +70,10 @@ def load_sample(train, state):
         state["field_" + field] = value
 
 
+def remember_simple_variant():
+    st.session_state.simple_selection = st.session_state.simple_variant
+
+
 def render(train, available):
     eyebrow("Phòng thí nghiệm / 01")
     st.title("Một hồ sơ. Nhiều khả năng.")
@@ -82,6 +86,19 @@ def render(train, available):
         st.button("Điền dữ liệu mẫu", use_container_width=True, on_click=load_sample,
                   args=(train, st.session_state))
     st.info(f"**{name}** · {description}")
+    variant = "M03"
+    if name == "Simple":
+        variant = st.selectbox(
+            "Chọn biến dùng cho hồi quy đơn",
+            list(SIMPLE_FEATURES),
+            index=list(SIMPLE_FEATURES).index(st.session_state.get("simple_selection", "M03")),
+            format_func=lambda key: f"{key} · {LABEL[SIMPLE_FEATURES[key]]}",
+            key="simple_variant",
+            on_change=remember_simple_variant,
+        )
+        fields = [SIMPLE_FEATURES[variant]]
+        st.caption(f"Chỉ {LABEL[fields[0]].lower()} được dùng để dự đoán với {variant}. "
+                   "Đổi lựa chọn để thử một model Simple khác; tất cả đều không clipping.")
     profile = st.session_state.profile.copy()
     groups = [
         ("01", "Thông tin học tập", "Nền tảng học tập trước kỳ dự đoán.",
@@ -95,6 +112,8 @@ def render(train, available):
     eyebrow("Thiết lập / hồ sơ đầu vào")
     for number, title, detail, members in groups:
         group_fields = [field for field in members if field in fields]
+        if not group_fields:
+            continue
         with st.container(border=True):
             st.markdown(f'<span class="card-index">{number} / INPUT</span>', unsafe_allow_html=True)
             st.subheader(title)
@@ -119,8 +138,9 @@ def render(train, available):
     st.write("")
     eyebrow("Phản hồi / theo thời gian thực")
     st.subheader("Kết quả dự đoán")
-    prediction = float(predict(name, frame)[0])
-    st.metric(f"GPA dự đoán · {name}", f"{prediction:.3f}", border=True)
+    prediction = float(predict(name, frame, variant=variant)[0])
+    st.metric(f"GPA dự đoán · {name}" + (f" {variant}" if name == "Simple" else ""),
+              f"{prediction:.3f}", border=True)
     if not 0 <= prediction <= 4:
         st.warning("Dự đoán nằm ngoài miền GPA 0–4. Web giữ nguyên giá trị, không cắt (no clipping).")
     st.caption("Giá trị ước lượng từ mô hình, không phải GPA thực tế của sinh viên.")
@@ -128,11 +148,15 @@ def render(train, available):
         st.markdown('<span class="card-index">WHAT IF / ĐƯỜNG DỰ ĐOÁN</span>', unsafe_allow_html=True)
         st.subheader("Điều gì xảy ra khi thay đổi một biến?")
         st.write("Các trường khác giữ nguyên theo hồ sơ đang hiển thị ở trên.")
-        candidates = ["Weekly_GenAI_Hours", "Pre_Semester_GPA", "Traditional_Study_Hours"]
+        candidates = ["Weekly_GenAI_Hours", "Pre_Semester_GPA", "Traditional_Study_Hours",
+                      "Tool_Diversity", "Perceived_AI_Dependency"]
         field = st.selectbox("Biến khảo sát", [column for column in candidates if column in fields],
                              format_func=LABEL.get)
-        grid = np.unique(np.r_[np.linspace(train[field].min(), train[field].max(), 61), profile[field]])
+        if field in ("Tool_Diversity", "Perceived_AI_Dependency"):
+            grid = np.sort(train[field].dropna().unique())
+        else:
+            grid = np.unique(np.r_[np.linspace(train[field].min(), train[field].max(), 61), profile[field]])
         rows = pd.DataFrame([profile] * len(grid)).assign(**{field: grid})
-        chart = pd.DataFrame({"x": grid, "GPA": predict(name, rows)})
+        chart = pd.DataFrame({"x": grid, "GPA": predict(name, rows, variant=variant)})
         st.altair_chart(sensitivity(chart, LABEL[field], profile[field]), width="stretch")
         st.caption("Chấm cam là hồ sơ hiện tại. Các đầu vào khác giữ nguyên; đường này không biểu thị tác động nhân quả.")

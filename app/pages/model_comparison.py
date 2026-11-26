@@ -16,7 +16,9 @@ def render(available):
         st.subheader(f"Cùng một hồ sơ, {len(available)} góc nhìn")
         st.caption("Dùng hồ sơ hiện tại từ trang Thử dự đoán, hoặc dòng mẫu đầu tiên nếu bạn chưa nhập.")
         frame = pd.DataFrame([st.session_state.profile])
-        scores = pd.DataFrame([{"Thuật toán": name, "GPA": predict(name, frame)[0]} for name in available])
+        variant = st.session_state.get("simple_selection", "M03")
+        scores = pd.DataFrame([{"Thuật toán": name, "GPA": predict(name, frame, variant=variant)[0]}
+                               for name in available])
         domain = [min(0, float(scores["GPA"].min())), max(4, float(scores["GPA"].max()))]
         bars = (alt.Chart(scores).mark_bar(color="#11665e", cornerRadiusEnd=5).encode(
             x=alt.X("GPA:Q", title="GPA dự đoán", scale=alt.Scale(domain=domain)),
@@ -24,6 +26,8 @@ def render(available):
             tooltip=["Thuật toán:N", alt.Tooltip("GPA:Q", format=".3f")]))
         st.altair_chart(bars, width="stretch")
         st.dataframe(scores, hide_index=True)
+        if "Simple" in available:
+            st.caption(f"Simple đang dùng {variant}. Đổi biến tại trang Thử dự đoán để cập nhật so sánh.")
     st.write("")
     eyebrow("Đánh giá / 7.500 dòng")
     st.subheader("Hiệu năng trên tập validation")
