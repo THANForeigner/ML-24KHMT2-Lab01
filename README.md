@@ -1,5 +1,30 @@
 # Lab 01 — AI Impact on Students EDA
 
+## Web showcase GPA (Streamlit)
+
+Từ thư mục gốc, dùng Python 3.13 (môi trường đã kiểm thử):
+
+```bash
+python3.13 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-showcase.txt
+python -m streamlit run app/app.py
+```
+
+Mở `http://localhost:8501`. Chọn **Thử dự đoán**, chọn thuật toán, sửa một đầu vào
+hoặc bấm **Điền dữ liệu mẫu**. GPA và đường dự đoán cập nhật ngay. Chuyển sang
+**So sánh** để dùng lại hồ sơ vừa nhập và xem MAE, RMSE, R² trên cùng tập validation.
+
+Ứng dụng dùng trực tiếp bốn pipeline đã lưu trong `outputs/{interaction,polynomial,ridge,elastic_net}/models/`
+của bản `main` tại `b472b8d`; không cần chạy lại notebook. Nếu một file bị thiếu, khôi phục
+file tương ứng từ bản clone. Các cột đầu vào lấy từ train; SHA-256 của train và
+validation được kiểm tra theo `data/metadata.json`. Web không dùng dữ liệu test.
+Riêng Ridge của snapshot này có `refit_on_trval=false`, `n_fit=35000` trong
+`outputs/ridge/metrics.json`. Artifact Ridge dùng sklearn 1.7.2 nên sklearn 1.9.1
+báo cảnh báo khi tải; test showcase đối chiếu GPA mẫu và RMSE validation đã lưu.
+
+Kiểm thử luồng giao diện: `python -m pytest -q tests/test_showcase.py`.
+
 ## Elastic Net Regression — trạng thái hiện tại
 
 Notebook: `notebooks/elastic_net_regression.ipynb`; mã nguồn chính nằm trong `src/lab01_ml/features/elastic_net_features.py` và `src/lab01_ml/models/`. Các file chia sẵn trong `data/splits/` được kiểm tra với `data/assignments.csv` và `data/metadata.json`; không tự tạo hoặc ghi đè split.
