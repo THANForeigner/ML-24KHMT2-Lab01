@@ -1,4 +1,7 @@
 .venv/
+.env
+.env.*
+!.env.example
 *.egg-info/
 .cache/
 __pycache__/
@@ -6,3 +9,9 @@ __pycache__/
 .agents/
 .specify/
 .specs/
+.superdesign/tmp/
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/*.tsbuildinfo
