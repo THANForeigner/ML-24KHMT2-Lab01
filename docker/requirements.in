@@ -1,0 +1,11 @@
+# Runtime only: versions verified by the API/model parity tests.
+# The repository artifacts span older scikit-learn versions; retain that warning.
+numpy==2.5.5
+pandas==2.3.3
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+statsmodels==0.14.6
+fastapi==0.165.0
+uvicorn==0.54.0
+pydantic==2.14.4

@@ -1,0 +1,66 @@
+import { expect, test } from '@playwright/test'
+
+test('real predictions, model switching and persistent profile', async ({ page }) => {
+  let predictions = 0
+  page.on('request', request => { if (request.url().endsWith('/api/predict')) predictions++ })
+  await page.goto('/#prediction')
+  await expect(page.getByLabel('GPA trước học kỳ', { exact: true })).toBeVisible()
+  await expect(page.getByText('Chưa có kết quả')).toBeVisible()
+  await page.getByLabel('GPA trước học kỳ', { exact: true }).fill('3.5')
+  expect(predictions).toBe(0)
+  await page.getByRole('button', { name: 'Dự đoán với Interaction' }).click()
+  await expect(page.locator('.gpa-value')).toBeVisible()
+  const firstResult = await page.locator('.gpa-value').innerText()
+  await page.getByRole('button', { name: /Chọn mô hình/ }).click()
+  await expect(page.getByRole('option').filter({ has: page.locator('.model-icon') })).toHaveCount(6)
+  await page.getByRole('option', { name: 'Ridge Điều chuẩn L2' }).click()
+  await expect(page.getByLabel('GPA trước học kỳ', { exact: true })).toHaveValue('3.5')
+  await expect(page.locator('.gpa-value')).toHaveText(firstResult)
+  await expect(page.getByTestId('result-model')).toHaveText('Interaction')
+  expect(predictions).toBe(1)
+  await page.getByRole('button', { name: 'Dự đoán với Ridge' }).click()
+  await expect(page.getByTestId('result-model')).toHaveText('Ridge')
+  expect(predictions).toBe(2)
+  await expect(page.locator('#profile-form input, #profile-form select')).toHaveCount(12)
+  await page.getByRole('button', { name: 'Thu gọn thanh điều hướng' }).click()
+  await expect(page.getByRole('button', { name: 'Mở rộng thanh điều hướng' })).toBeVisible()
+  await page.getByRole('button', { name: 'Chuyển sang chế độ tối' }).click()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await expect(page.getByLabel('GPA trước học kỳ', { exact: true })).toHaveValue('3.5')
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await expect(page.getByRole('button', { name: 'Mở rộng thanh điều hướng' })).toBeVisible()
+})
+
+test('keyboard can reach and select all six models', async ({ page }) => {
+  await page.goto('/#prediction')
+  const picker = page.getByRole('button', { name: /Chọn mô hình/ })
+  await picker.focus()
+  await page.keyboard.press('ArrowDown')
+  await page.keyboard.press('End')
+  await page.keyboard.press('Enter')
+  await expect(picker).toContainText('Elastic Net')
+  await expect(page.getByRole('button', { name: 'Mô hình tiếp theo' })).toBeDisabled()
+  await expect(page.getByText('Chưa có kết quả')).toBeVisible()
+})
+
+for (const width of [1440, 1280, 1024, 768, 390, 320]) {
+  test(`layout has no horizontal overflow at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 960 })
+    await page.goto('/#prediction')
+    await expect(page.getByLabel('GPA trước học kỳ', { exact: true })).toBeVisible()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    const counter = page.locator('.model-position')
+    const metrics = await counter.evaluate(el => ({
+      height: el.getBoundingClientRect().height, line: parseFloat(getComputedStyle(el).lineHeight),
+    }))
+    expect(metrics.height).toBeLessThan(25)
+    await page.getByRole('button', { name: /Chọn mô hình/ }).click()
+    const box = await page.getByRole('listbox').boundingBox()
+    expect(box!.x + box!.width).toBeLessThanOrEqual(width)
+    expect(box!.x).toBeGreaterThanOrEqual(0)
+    await page.keyboard.press('Escape')
+    await page.getByRole('button', { name: /thanh điều hướng/ }).click()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  })
+}

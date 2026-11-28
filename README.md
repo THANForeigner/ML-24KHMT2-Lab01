@@ -97,6 +97,18 @@ Notebook chính: [notebooks/kaggle/01_eda.ipynb](notebooks/kaggle/01_eda.ipynb).
 
 Notebook tự đọc CSV thực tế trong **`archive/`**, không sửa file gốc, không giải nén hay tải dữ liệu khi chạy. Nếu có nhiều CSV phù hợp, đặt `DATA_PATH` ở cell cấu hình đầu tiên. Target là `Post_Semester_GPA`; `GPA_Change` chỉ dùng làm outcome phân tích.
 
+## React showcase
+
+Giao diện React gồm **Tổng quan**, **Thử dự đoán** và **So sánh**, kết nối sáu mô hình Python: xem [hướng dẫn chạy và kiểm thử](docs/REACT_SHOWCASE.md). Bản Streamlit vẫn được giữ lại.
+
+Chạy nhanh bằng Docker:
+
+```bash
+docker compose up --build -d --wait
+```
+
+Mở <http://localhost:8080>. Xem [hướng dẫn Docker Compose](docs/DOCKER.md) để đổi port, xem log, kiểm thử và dừng ứng dụng.
+
 ## Chạy
 
 Python 3.11+; môi trường đã kiểm thử được ghi trong `reports/run_metadata.json`.
